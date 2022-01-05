@@ -7,11 +7,11 @@
 ```r
 library(dplyr)
 #> 
-#> Присоединяю пакет: 'dplyr'
-#> Следующие объекты скрыты от 'package:stats':
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
 #> 
 #>     filter, lag
-#> Следующие объекты скрыты от 'package:base':
+#> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
 
@@ -112,4 +112,103 @@ group_by(iris, Species) %>%
 #> 1 setosa             5.01        3.43
 #> 2 versicolor         5.94        2.77
 #> 3 virginica          6.59        2.97
+```
+
+## Заданиe к третьему уроку {-}
+
+1. Ваша задача не переворачивая таблицу, добавить в неё 4 столбца:
+
+* winter_avg_sales - средний объём продаж за зимные месяца;
+* spring_avg_sales - средний объём продаж за весенние месяца;
+* summer_avg_sales - средний объём продаж за летние месяца;
+* autumn_avg_sales - средний объём продаж за осенние месяца;
+
+И оставить из исходной таблицы только столбец с обозначением года, и рассчитанные на предыдущем шаге столбцы.
+
+
+
+Решение:
+
+```r
+library(dplyr)
+
+rowwise(sales) %>% 
+  mutate(
+    winter_avg_sales = mean(Dec, Jan, Feb),
+    spring_avg_sales = mean(c_across(Mar:May)),
+    summer_avg_sales = mean(c_across(Jun:Aug)),
+    autumn_avg_sales = mean(c_across(Sep:Nov))
+  ) %>% 
+  select(year, matches('avg'))
+#> # A tibble: 6 x 5
+#> # Rowwise: 
+#>    year winter_avg_sales spring_avg_sales summer_avg_sales
+#>   <int>            <dbl>            <dbl>            <dbl>
+#> 1  2000              297             215.             243 
+#> 2  2001              263             248.             272 
+#> 3  2002              187             241.             189 
+#> 4  2003              234             309              305.
+#> 5  2004              183             220              301.
+#> 6  2005              273             273              275.
+#> # ... with 1 more variable: autumn_avg_sales <dbl>
+```
+
+## Заданиe к четвёртому уроку {-}
+
+1. Сгенерируйте согласно этим параметрам таблицу содержащую в столбце `sim` номер строки таблицы параметров, а в столбце `val` сами значения случайных распределений. Для воспроизводимости результатов установите счётчик генерации случайных чисел в позиции 400 (`set.seed(400)`). Тогда итоговый результат будет иметь следующий вид:
+
+
+
+Решение:
+
+```r
+library(dplyr)
+set.seed(400)
+
+params %>%
+   rowwise(sim) %>%
+   summarise(val = rnorm(n, mean, sd))
+#> `summarise()` has grouped output by 'sim'. You can override using the `.groups` argument.
+#> # A tibble: 21 x 2
+#> # Groups:   sim [3]
+#>      sim    val
+#>    <dbl>  <dbl>
+#>  1     1  -4.18
+#>  2     1   4.08
+#>  3     1   8.36
+#>  4     1  -2.41
+#>  5     2  -4.02
+#>  6     2 -11.5 
+#>  7     2  10.6 
+#>  8     2   9.20
+#>  9     2   3.08
+#> 10     2  -3.75
+#> # ... with 11 more rows
+```
+
+## Заданиe к пятому уроку {-}
+
+1. Ваша задача расчитать фактическую запрлату каждого сотрудника по формуле `total = rate * time_rate + bonus - penalty`.
+
+
+
+Решение:
+
+```r
+library(dplyr)
+
+rows_update(salary, bonus, by = 'employee_id') %>% 
+  rows_update(penalty, by = 'employee_id') %>% 
+  rows_insert(new, by = 'employee_id') %>% 
+  left_join(time_rate, by = 'employee_id') %>% 
+  mutate(total = rate * time_rate + bonus - penalty)
+#> # A tibble: 6 x 6
+#>   employee_id  rate bonus penalty time_rate total
+#>         <dbl> <dbl> <dbl>   <dbl>     <dbl> <dbl>
+#> 1           1  1000     0     150       1     850
+#> 2           2  1200     0       0       1    1200
+#> 3           3   700   100       0       1     800
+#> 4           4  1500     0     320       0.8   880
+#> 5           5  2000   500      80       1    2420
+#> 6           6   500     0       0       0.5   250
 ```

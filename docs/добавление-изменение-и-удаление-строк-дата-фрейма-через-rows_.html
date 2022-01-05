@@ -93,7 +93,7 @@
 <h2>
 <span class="header-section-number">5.3</span> Код<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#devtools::install_github("tidyverse/dplyr")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 
@@ -195,6 +195,68 @@
 <span class="va">result</span> <span class="op">&lt;-</span>
   <span class="va">sales</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rows.html">rows_update</a></span><span class="op">(</span><span class="va">refund</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"product"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="упражнение-1" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Упражнение<a class="anchor" aria-label="anchor" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>В этот раз вам необходимо будет рассчитать зарплату 6ти сотрудников.</p>
+<p>Для получения тестовых данных выполните приведённый ниже пример кода:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="co"># зарплатная ведомость со ставками от бухгалтерии</span>
+<span class="va">salary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  employee_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
+  rate        <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1200</span>, <span class="fl">700</span>, <span class="fl">1500</span>, <span class="fl">2000</span><span class="op">)</span>,
+  bonus       <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span><span class="op">)</span>,
+  penalty     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">5</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="co"># бонусы от руководителей отделов</span>
+<span class="va">bonus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  employee_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>,
+  bonus <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">500</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="co"># штрафы от руководителей отделов</span>
+<span class="va">penalty</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  employee_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>,
+  penalty <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">320</span>, <span class="fl">80</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="co"># внесение нового сотрудника в ведомость</span>
+<span class="va">new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  employee_id <span class="op">=</span> <span class="fl">6</span>,
+  rate <span class="op">=</span> <span class="fl">500</span>,
+  bonus <span class="op">=</span> <span class="fl">0</span>,
+  penalty <span class="op">=</span> <span class="fl">0</span>
+<span class="op">)</span>
+
+<span class="co"># корректировки ставки по фактически выработанному времени</span>
+<span class="va">time_rate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
+  employee_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, 
+  time_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0.8</span>, <span class="fl">1</span>, <span class="fl">0.5</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<p>В результате вы сформировали 5 таблиц:</p>
+<ul>
+<li>salary - зарплатная ведомость от бухгалтерии, бухгалтерия знает только данные о ставках сотрудников;</li>
+<li>bonus - бонусы, которые выписали руководители отделов сотрудникам;</li>
+<li>penalty - штрафы, которые выписали руководители отделов;</li>
+<li>new - таблица с 6 сотрудником, он новичёк и бухгалтерия забыла внести его сразу в основную ведомость;</li>
+<li>time_rate - данные о фактически отработанном времени сотрудника з амесяц.</li>
+</ul>
+<p>Ваша задача расчитать фактическую запрлату каждого сотрудника по формуле <code>total = rate * time_rate + bonus - penalty</code>.</p>
+<p>Итоговая таблица при правильном расчёте будет иметь следующий вид:</p>
+<pre><code># A tibble: 6 x 6
+  employee_id  rate bonus penalty time_rate total
+        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1           1  1000     0     150       1     850
+2           2  1200     0       0       1    1200
+3           3   700   100       0       1     800
+4           4  1500     0     320       0.8   880
+5           5  2000   500      80       1    2420
+6           6   500     0       0       0.5   250</code></pre>
 
 </div>
 </div>
@@ -208,6 +270,7 @@
 <li><a class="nav-link" href="#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-4"><span class="header-section-number">5.1</span> Описание</a></li>
 <li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-4"><span class="header-section-number">5.2</span> Видео</a></li>
 <li><a class="nav-link" href="#%D0%BA%D0%BE%D0%B4-4"><span class="header-section-number">5.3</span> Код</a></li>
+<li><a class="nav-link" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-1"><span class="header-section-number">5.4</span> Упражнение</a></li>
 </ul>
 
       <div class="book-extra">
@@ -225,7 +288,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-01-04.</p>
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-01-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

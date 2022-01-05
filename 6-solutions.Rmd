@@ -38,3 +38,118 @@ mutate(iris, across(ends_with('Length'), ~ . / mean(.))) %>%
 group_by(iris, Species) %>% 
   summarise(across(starts_with('Sepal'), mean))
 ```
+
+## Заданиe к третьему уроку {-}
+
+1. Ваша задача не переворачивая таблицу, добавить в неё 4 столбца:
+
+* winter_avg_sales - средний объём продаж за зимные месяца;
+* spring_avg_sales - средний объём продаж за весенние месяца;
+* summer_avg_sales - средний объём продаж за летние месяца;
+* autumn_avg_sales - средний объём продаж за осенние месяца;
+
+И оставить из исходной таблицы только столбец с обозначением года, и рассчитанные на предыдущем шаге столбцы.
+
+```{r, echo=FALSE}
+set.seed(400)
+year <- 2000:2005
+sales <- sapply(
+  month.abb, 
+  FUN = function(x) round(runif(n = 6, min = 100, max = 400), 0)
+  )
+
+sales <- as.data.frame(sales, row.names = year)
+sales$year <- year
+```
+
+Решение:
+```{r}
+library(dplyr)
+
+rowwise(sales) %>% 
+  mutate(
+    winter_avg_sales = mean(Dec, Jan, Feb),
+    spring_avg_sales = mean(c_across(Mar:May)),
+    summer_avg_sales = mean(c_across(Jun:Aug)),
+    autumn_avg_sales = mean(c_across(Sep:Nov))
+  ) %>% 
+  select(year, matches('avg'))
+```
+
+## Заданиe к четвёртому уроку {-}
+
+1. Сгенерируйте согласно этим параметрам таблицу содержащую в столбце `sim` номер строки таблицы параметров, а в столбце `val` сами значения случайных распределений. Для воспроизводимости результатов установите счётчик генерации случайных чисел в позиции 400 (`set.seed(400)`). Тогда итоговый результат будет иметь следующий вид:
+
+```{r, echo=FALSE}
+library(dplyr)
+
+params <- tribble(
+ ~sim, ~n, ~mean, ~sd,
+    1,  4,     1,   5,
+    2,  7,     2,   10,
+    3,  10,   -1,   25
+)
+```
+
+Решение:
+```{r}
+library(dplyr)
+set.seed(400)
+
+params %>%
+   rowwise(sim) %>%
+   summarise(val = rnorm(n, mean, sd))
+```
+
+## Заданиe к пятому уроку {-}
+
+1. Ваша задача расчитать фактическую запрлату каждого сотрудника по формуле `total = rate * time_rate + bonus - penalty`.
+
+```{r, echo=FALSE}
+library(dplyr)
+
+# зарплатная ведомость со ставками от бухгалтерии
+salary <- tibble(
+  employee_id = 1:5,
+  rate        = c(1000, 1200, 700, 1500, 2000),
+  bonus       = rep(0, 5),
+  penalty     = rep(0, 5)
+)
+
+# бонусы от руководителей отделов
+bonus <- tibble(
+  employee_id = c(3, 5),
+  bonus = c(100, 500)
+)
+
+# штрафы от руководителей отделов
+penalty <- tibble(
+  employee_id = c(1, 4, 5),
+  penalty = c(150, 320, 80)
+)
+
+# внесение нового сотрудника в ведомость
+new <- tibble(
+  employee_id = 6,
+  rate = 500,
+  bonus = 0,
+  penalty = 0
+)
+
+# корректировки ставки по фактически выработанному времени
+time_rate <- tibble(
+  employee_id = 1:6, 
+  time_rate = c(1, 1, 1, 0.8, 1, 0.5)
+)
+```
+
+Решение:
+```{r}
+library(dplyr)
+
+rows_update(salary, bonus, by = 'employee_id') %>% 
+  rows_update(penalty, by = 'employee_id') %>% 
+  rows_insert(new, by = 'employee_id') %>% 
+  left_join(time_rate, by = 'employee_id') %>% 
+  mutate(total = rate * time_rate + bonus - penalty)
+```

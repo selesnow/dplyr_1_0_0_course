@@ -179,6 +179,51 @@
 <span class="co"># можно извлекать сводки или коэфициенты построенной модели</span>
 <span class="va">by_cyl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span>
 <span class="va">by_cyl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="упражнения-1" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Упражнения<a class="anchor" aria-label="anchor" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>В этот раз тестовые данные для выполнения упражнения мы будем генерировать самостоятельно, используйте приведённый ниже код.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># тестовый набор данных</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">400</span><span class="op">)</span>
+<span class="va">year</span> <span class="op">&lt;-</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2005</span>
+<span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>
+  <span class="va">month.abb</span>, 
+  FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">6</span>, min <span class="op">=</span> <span class="fl">100</span>, max <span class="op">=</span> <span class="fl">400</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span>
+  <span class="op">)</span>
+
+<span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">sales</span>, row.names <span class="op">=</span> <span class="va">year</span><span class="op">)</span>
+<span class="va">sales</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="va">year</span>
+<span class="va">sales</span>
+<span class="co">#&gt;      Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec year</span>
+<span class="co">#&gt; 2000 145 174 342 185 117 313 314 102 382 220 226 297 2000</span>
+<span class="co">#&gt; 2001 156 251 286 280 179 176 317 323 247 194 233 263 2001</span>
+<span class="co">#&gt; 2002 319 182 329 155 240 177 146 244 370 300 197 187 2002</span>
+<span class="co">#&gt; 2003 209 187 238 296 393 234 366 314 198 213 206 234 2003</span>
+<span class="co">#&gt; 2004 379 126 263 261 136 201 352 351 362 203 304 183 2004</span>
+<span class="co">#&gt; 2005 221 275 374 318 127 376 257 193 340 190 225 273 2005</span></code></pre></div>
+<p>В результате вы получили продаж, каждая строка которой хранит данные за определённый год, а каждый столбец за определённый месяц года.</p>
+<p>Ваша задача не переворачивая таблицу, добавить в неё 4 столбца:</p>
+<ul>
+<li>winter_avg_sales - средний объём продаж за зимные месяца;</li>
+<li>spring_avg_sales - средний объём продаж за весенние месяца;</li>
+<li>summer_avg_sales - средний объём продаж за летние месяца;</li>
+<li>autumn_avg_sales - средний объём продаж за осенние месяца;</li>
+</ul>
+<p>И оставить из исходной таблицы только столбец с обозначением года, и рассчитанные на предыдущем шаге столбцы.</p>
+<p>Результат вычислений будет выглядить вот так:</p>
+<pre><code># A tibble: 6 x 5
+# Rowwise: 
+   year winter_avg_sales spring_avg_sales summer_avg_sales autumn_avg_sales
+  &lt;int&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+1  2000              322             226              145              227 
+2  2001              174             192.             179.             295.
+3  2002              106             352.             215.             258.
+4  2003              105             260.             334.             206.
+5  2004              167             192.             239              254.
+6  2005              210             191.             271.             235 </code></pre>
 
 </div>
 </div>
@@ -192,6 +237,7 @@
 <li><a class="nav-link" href="#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-2"><span class="header-section-number">3.1</span> Описание</a></li>
 <li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-2"><span class="header-section-number">3.2</span> Видео</a></li>
 <li><a class="nav-link" href="#%D0%BA%D0%BE%D0%B4-2"><span class="header-section-number">3.3</span> Код</a></li>
+<li><a class="nav-link" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-1"><span class="header-section-number">3.4</span> Упражнения</a></li>
 </ul>
 
       <div class="book-extra">
@@ -209,7 +255,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-01-04.</p>
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-01-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -86,7 +86,7 @@
 <h2>
 <span class="header-section-number">4.3</span> Код<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#devtools::install_github("tidyverse/dplyr")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 
@@ -183,6 +183,38 @@
 <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">grp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/do.html">do</a></span><span class="op">(</span><span class="fu">quibble</span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="упражнение" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Упражнение<a class="anchor" aria-label="anchor" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Вам дана таблица параметров генерации случайной выборки с нормальным распределением (генерировать случайную выборку с нормальным распределением позволяет функция <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>).</p>
+<p>Для генерации таблицы параметров выполните следующий код:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="va">params</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
+ <span class="op">~</span><span class="va">sim</span>, <span class="op">~</span><span class="va">n</span>, <span class="op">~</span><span class="va">mean</span>, <span class="op">~</span><span class="va">sd</span>,
+    <span class="fl">1</span>,  <span class="fl">4</span>,     <span class="fl">1</span>,   <span class="fl">5</span>,
+    <span class="fl">2</span>,  <span class="fl">7</span>,     <span class="fl">2</span>,   <span class="fl">10</span>,
+    <span class="fl">3</span>,  <span class="fl">10</span>,   <span class="op">-</span><span class="fl">1</span>,   <span class="fl">25</span>
+<span class="op">)</span></code></pre></div>
+<p>Теперь сгенерируйте согласно этим параметрам таблицу содержащую в столбце <code>sim</code> номер строки таблицы параметров, а в столбце <code>val</code> сами значения случайных распределений. Для воспроизводимости результатов установите счётчик генерации случайных чисел в позиции 400 (<code>set.seed(400)</code>). Тогда итоговый результат будет иметь следующий вид:</p>
+<pre><code># A tibble: 21 x 2
+# Groups:   sim [3]
+     sim   val
+   &lt;dbl&gt; &lt;dbl&gt;
+ 1     1 -1.75
+ 2     1 -3.70
+ 3     1  2.27
+ 4     1 13.2 
+ 5     2  9.87
+ 6     2 -5.14
+ 7     2 -8.09
+ 8     2 -3.57
+ 9     2  6.77
+10     2 29.4 
+# ... with 11 more rows</code></pre>
 
 </div>
 </div>
@@ -196,6 +228,7 @@
 <li><a class="nav-link" href="#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-3"><span class="header-section-number">4.1</span> Описание</a></li>
 <li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-3"><span class="header-section-number">4.2</span> Видео</a></li>
 <li><a class="nav-link" href="#%D0%BA%D0%BE%D0%B4-3"><span class="header-section-number">4.3</span> Код</a></li>
+<li><a class="nav-link" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5"><span class="header-section-number">4.4</span> Упражнение</a></li>
 </ul>
 
       <div class="book-extra">
@@ -213,7 +246,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-01-04.</p>
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-01-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
