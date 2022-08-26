@@ -7,7 +7,7 @@
 <title>Урок 3 Перебор строк функцией rowwise() | Введение в dplyr 1.0.0</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="3.1 Описание В этом видео мы разберёмся с функцией rowwise(), из пакета dplyr. Данная функция позволяет вам осуществить перебор строк таблицы не прибегая к циклам и функциям семейства apply или им...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
 <meta property="og:title" content="Урок 3 Перебор строк функцией rowwise() | Введение в dplyr 1.0.0">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/selesnow/dplyr_1_0_0_course/перебор-строк-функцией-rowwise.html">
@@ -17,9 +17,9 @@
 <meta name="twitter:title" content="Урок 3 Перебор строк функцией rowwise() | Введение в dplyr 1.0.0">
 <meta name="twitter:description" content="3.1 Описание В этом видео мы разберёмся с функцией rowwise(), из пакета dplyr. Данная функция позволяет вам осуществить перебор строк таблицы не прибегая к циклам и функциям семейства apply или им...">
 <meta name="twitter:image" content="https://github.com/selesnow/dplyr_1_0_0_course/img/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -27,7 +27,11 @@
 
       gtag('config', 'UA-114798296-1');
     </script><link rel="shortcut icon" href="img/favicon.ico">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -80,7 +84,7 @@
 <h2>
 <span class="header-section-number">3.2</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-2"><i class="fas fa-link"></i></a>
 </h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/b23WR3vEGJc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/b23WR3vEGJc?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 </div>
 <div id="код-2" class="section level2" number="3.3">
@@ -88,97 +92,97 @@
 <span class="header-section-number">3.3</span> Код<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-2"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#devtools::install_github("tidyverse/dplyr")</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-
-<span class="co"># test data</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  student_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, 
-  test1 <span class="op">=</span> <span class="fl">10</span><span class="op">:</span><span class="fl">13</span>, 
-  test2 <span class="op">=</span> <span class="fl">20</span><span class="op">:</span><span class="fl">23</span>, 
-  test3 <span class="op">=</span> <span class="fl">30</span><span class="op">:</span><span class="fl">33</span>, 
-  test4 <span class="op">=</span> <span class="fl">40</span><span class="op">:</span><span class="fl">43</span>
-<span class="op">)</span>
-
-<span class="va">df</span>
-
-<span class="co"># попытка посчитать среднюю оценку по студету</span>
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># используем rowwise для преобразования фрейма</span>
-<span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">student_id</span><span class="op">)</span>
-<span class="va">rf</span>
-
-<span class="va">rf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># тоже самое с использованием c_across</span>
-<span class="va">rf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"test"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># ###########################</span>
-<span class="co"># некоторые арифметические операции векторизированы по умолчанию</span>
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>total <span class="op">=</span> <span class="va">test1</span> <span class="op">+</span> <span class="va">test2</span> <span class="op">+</span> <span class="va">test3</span> <span class="op">+</span> <span class="va">test4</span><span class="op">)</span>
-
-<span class="co"># этот подход можно использовать для вычисления среднего</span>
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="op">(</span><span class="va">test1</span> <span class="op">+</span> <span class="va">test2</span> <span class="op">+</span> <span class="va">test3</span> <span class="op">+</span> <span class="va">test4</span><span class="op">)</span> <span class="op">/</span> <span class="fl">4</span><span class="op">)</span>
-
-<span class="co"># так же вы можете использовать некоторые специальные функции</span>
-<span class="co"># для вычисления некоторых статистик</span>
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>
-  min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmin</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span><span class="op">)</span>, 
-  max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span><span class="op">)</span>, 
-  string <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span>, sep <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span>
-<span class="op">)</span>
-<span class="co"># все векторизированные функции будут работать быстрее чем rowwise</span>
-<span class="co"># но rowwise позволяет векторизировать любую функцию</span>
-
-<span class="co"># ##################################</span>
-<span class="co"># работа со столбцами списками</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>
-  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,
-  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">1</span>, <span class="st">"a"</span><span class="op">)</span>,
-  z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">sum</span>, <span class="va">mean</span>, <span class="va">sd</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="co"># мы можем перебором обработать каждый список</span>
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
-    x_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,
-    y_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>,
-    z_call <span class="op">=</span> <span class="fu">z</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>
-  <span class="op">)</span>
-
-<span class="co"># ##################################</span>
-<span class="co"># симуляция случайных данных</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span>
-  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span> <span class="va">n</span>, <span class="op">~</span> <span class="va">min</span>, <span class="op">~</span> <span class="va">max</span>,
-  <span class="fl">1</span>,   <span class="fl">3</span>,     <span class="fl">0</span>,     <span class="fl">1</span>,
-  <span class="fl">2</span>,   <span class="fl">2</span>,    <span class="fl">10</span>,   <span class="fl">100</span>,
-  <span class="fl">3</span>,   <span class="fl">2</span>,   <span class="fl">100</span>,  <span class="fl">1000</span>,
-<span class="op">)</span>
-
-<span class="co"># используем rowwise для симуляции данных</span>
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">min</span>, <span class="va">max</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">min</span>, <span class="va">max</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># ##################################</span>
-<span class="co"># функция nest_by позволяет создавать столбцы списки</span>
-<span class="va">by_cyl</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nest_by.html">nest_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>
-<span class="va">by_cyl</span>
-
-<span class="co"># такой подход удобно использовать при построении линейной модели</span>
-<span class="co"># используем mutate для подгонки моели под каждую группа данных</span>
-<span class="va">by_cyl</span> <span class="op">&lt;-</span> <span class="va">by_cyl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">by_cyl</span>
-<span class="co"># теперь с помощью summarise </span>
-<span class="co"># можно извлекать сводки или коэфициенты построенной модели</span>
-<span class="va">by_cyl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span>
-<span class="va">by_cyl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#devtools::install_github("tidyverse/dplyr")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># test data</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  student_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, </span>
+<span>  test1 <span class="op">=</span> <span class="fl">10</span><span class="op">:</span><span class="fl">13</span>, </span>
+<span>  test2 <span class="op">=</span> <span class="fl">20</span><span class="op">:</span><span class="fl">23</span>, </span>
+<span>  test3 <span class="op">=</span> <span class="fl">30</span><span class="op">:</span><span class="fl">33</span>, </span>
+<span>  test4 <span class="op">=</span> <span class="fl">40</span><span class="op">:</span><span class="fl">43</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span></span>
+<span></span>
+<span><span class="co"># попытка посчитать среднюю оценку по студету</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># используем rowwise для преобразования фрейма</span></span>
+<span><span class="va">rf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">student_id</span><span class="op">)</span></span>
+<span><span class="va">rf</span></span>
+<span></span>
+<span><span class="va">rf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># тоже самое с использованием c_across</span></span>
+<span><span class="va">rf</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"test"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ###########################</span></span>
+<span><span class="co"># некоторые арифметические операции векторизированы по умолчанию</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>total <span class="op">=</span> <span class="va">test1</span> <span class="op">+</span> <span class="va">test2</span> <span class="op">+</span> <span class="va">test3</span> <span class="op">+</span> <span class="va">test4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># этот подход можно использовать для вычисления среднего</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="op">(</span><span class="va">test1</span> <span class="op">+</span> <span class="va">test2</span> <span class="op">+</span> <span class="va">test3</span> <span class="op">+</span> <span class="va">test4</span><span class="op">)</span> <span class="op">/</span> <span class="fl">4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># так же вы можете использовать некоторые специальные функции</span></span>
+<span><span class="co"># для вычисления некоторых статистик</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>  min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmin</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span><span class="op">)</span>, </span>
+<span>  max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span><span class="op">)</span>, </span>
+<span>  string <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">test1</span>, <span class="va">test2</span>, <span class="va">test3</span>, <span class="va">test4</span>, sep <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># все векторизированные функции будут работать быстрее чем rowwise</span></span>
+<span><span class="co"># но rowwise позволяет векторизировать любую функцию</span></span>
+<span></span>
+<span><span class="co"># ##################################</span></span>
+<span><span class="co"># работа со столбцами списками</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
+<span>  y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">1</span>, <span class="st">"a"</span><span class="op">)</span>,</span>
+<span>  z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">sum</span>, <span class="va">mean</span>, <span class="va">sd</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># мы можем перебором обработать каждый список</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    x_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
+<span>    y_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>,</span>
+<span>    z_call <span class="op">=</span> <span class="fu">z</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ##################################</span></span>
+<span><span class="co"># симуляция случайных данных</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">id</span>, <span class="op">~</span> <span class="va">n</span>, <span class="op">~</span> <span class="va">min</span>, <span class="op">~</span> <span class="va">max</span>,</span>
+<span>  <span class="fl">1</span>,   <span class="fl">3</span>,     <span class="fl">0</span>,     <span class="fl">1</span>,</span>
+<span>  <span class="fl">2</span>,   <span class="fl">2</span>,    <span class="fl">10</span>,   <span class="fl">100</span>,</span>
+<span>  <span class="fl">3</span>,   <span class="fl">2</span>,   <span class="fl">100</span>,  <span class="fl">1000</span>,</span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># используем rowwise для симуляции данных</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">min</span>, <span class="va">max</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">min</span>, <span class="va">max</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ##################################</span></span>
+<span><span class="co"># функция nest_by позволяет создавать столбцы списки</span></span>
+<span><span class="va">by_cyl</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nest_by.html">nest_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span></span>
+<span><span class="va">by_cyl</span></span>
+<span></span>
+<span><span class="co"># такой подход удобно использовать при построении линейной модели</span></span>
+<span><span class="co"># используем mutate для подгонки моели под каждую группа данных</span></span>
+<span><span class="va">by_cyl</span> <span class="op">&lt;-</span> <span class="va">by_cyl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">by_cyl</span></span>
+<span><span class="co"># теперь с помощью summarise </span></span>
+<span><span class="co"># можно извлекать сводки или коэфициенты построенной модели</span></span>
+<span><span class="va">by_cyl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">by_cyl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="упражнения-1" class="section level2" number="3.4">
 <h2>
@@ -186,24 +190,24 @@
 </h2>
 <p>В этот раз тестовые данные для выполнения упражнения мы будем генерировать самостоятельно, используйте приведённый ниже код.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># тестовый набор данных</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">400</span><span class="op">)</span>
-<span class="va">year</span> <span class="op">&lt;-</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2005</span>
-<span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span>
-  <span class="va">month.abb</span>, 
-  FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">6</span>, min <span class="op">=</span> <span class="fl">100</span>, max <span class="op">=</span> <span class="fl">400</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span>
-  <span class="op">)</span>
-
-<span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">sales</span>, row.names <span class="op">=</span> <span class="va">year</span><span class="op">)</span>
-<span class="va">sales</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="va">year</span>
-<span class="va">sales</span>
-<span class="co">#&gt;      Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec year</span>
-<span class="co">#&gt; 2000 145 174 342 185 117 313 314 102 382 220 226 297 2000</span>
-<span class="co">#&gt; 2001 156 251 286 280 179 176 317 323 247 194 233 263 2001</span>
-<span class="co">#&gt; 2002 319 182 329 155 240 177 146 244 370 300 197 187 2002</span>
-<span class="co">#&gt; 2003 209 187 238 296 393 234 366 314 198 213 206 234 2003</span>
-<span class="co">#&gt; 2004 379 126 263 261 136 201 352 351 362 203 304 183 2004</span>
-<span class="co">#&gt; 2005 221 275 374 318 127 376 257 193 340 190 225 273 2005</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># тестовый набор данных</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">400</span><span class="op">)</span></span>
+<span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fl">2000</span><span class="op">:</span><span class="fl">2005</span></span>
+<span><span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span></span>
+<span>  <span class="va">month.abb</span>, </span>
+<span>  FUN <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">6</span>, min <span class="op">=</span> <span class="fl">100</span>, max <span class="op">=</span> <span class="fl">400</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">sales</span>, row.names <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span>
+<span><span class="va">sales</span><span class="op">$</span><span class="va">year</span> <span class="op">&lt;-</span> <span class="va">year</span></span>
+<span><span class="va">sales</span></span>
+<span><span class="co">#&gt;      Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec year</span></span>
+<span><span class="co">#&gt; 2000 145 174 342 185 117 313 314 102 382 220 226 297 2000</span></span>
+<span><span class="co">#&gt; 2001 156 251 286 280 179 176 317 323 247 194 233 263 2001</span></span>
+<span><span class="co">#&gt; 2002 319 182 329 155 240 177 146 244 370 300 197 187 2002</span></span>
+<span><span class="co">#&gt; 2003 209 187 238 296 393 234 366 314 198 213 206 234 2003</span></span>
+<span><span class="co">#&gt; 2004 379 126 263 261 136 201 352 351 362 203 304 183 2004</span></span>
+<span><span class="co">#&gt; 2005 221 275 374 318 127 376 257 193 340 190 225 273 2005</span></span></code></pre></div>
 <p>В результате вы получили продаж, каждая строка которой хранит данные за определённый год, а каждый столбец за определённый месяц года.</p>
 <p>Ваша задача не переворачивая таблицу, добавить в неё 4 столбца:</p>
 <ul>
@@ -255,7 +259,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-01-05.</p>
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
