@@ -1,0 +1,1300 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Введение в dplyr 1.0.0},
+  pdfauthor={Алексей Селезнёв},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Введение в dplyr 1.0.0}
+\author{Алексей Селезнёв}
+\date{2022-08-26}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{ux432ux432ux435ux434ux435ux43dux438ux435}{%
+\chapter*{Введение}\label{ux432ux432ux435ux434ux435ux43dux438ux435}}
+\addcontentsline{toc}{chapter}{Введение}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{ux43e-ux43aux443ux440ux441ux435}{%
+\section*{О курсе}\label{ux43e-ux43aux443ux440ux441ux435}}
+\addcontentsline{toc}{section}{О курсе}
+
+\texttt{dplyr} - один из наиболее популярных пакетов, который реализует грамматику манипуляции данными в языке R. Официально первый релиз \texttt{dplyr} был выпещен в 2014 году, но пакет развивался, и первая стабильная версия с устоявшимся синтаксисом, под номером 1.0.0 была выпущена весной 2020 года. Этому релизу предшествовала серия статей, в которых Хедли Викхем описывал все нововведения в \texttt{dplyr}. Этот мини курс появился из 5 видео уроков снятых по этим статьям.
+
+В основе видео уроков лежат следующие статьи:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-select-rename-relocate/}{dplyr 1.0.0: select, rename, relocate}
+\item
+  \href{https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/}{dplyr 1.0.0: working across columns}
+\item
+  \href{https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-rowwise/}{dplyr 1.0.0: working within rows}
+\item
+  \href{https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-summarise/}{dplyr 1.0.0: new summarise() features}
+\item
+  \href{https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/}{dplyr 1.0.0: last minute additions}
+\end{itemize}
+
+\hypertarget{ux434ux43bux44f-ux43aux43eux433ux43e-ux44dux442ux43eux442-ux43aux443ux440ux441}{%
+\section*{Для кого этот курс}\label{ux434ux43bux44f-ux43aux43eux433ux43e-ux44dux442ux43eux442-ux43aux443ux440ux441}}
+\addcontentsline{toc}{section}{Для кого этот курс}
+
+Для прохождения курса вы уже должны иметь навыки работы с инфраструктурой \texttt{tidyverse}. Приступать к прохождению курса ``Введение в dplyr 1.0.0'' я советую тем, кто уже имеет базовые навыки работы в R. Т.е. изначально я рекомендую вам пройти курс \href{https://selesnow.github.io/r4excel_users/}{``Язык R для пользователей Excel''}, и потом приступать к прохождению данного курса.
+
+\hypertarget{ux440ux435ux43aux43eux43cux435ux43dux434ux430ux446ux438ux438-ux43fux43e-ux43fux440ux43eux445ux43eux436ux434ux435ux43dux438ux44e-ux43aux443ux440ux441ux430}{%
+\section*{Рекомендации по прохождению курса}\label{ux440ux435ux43aux43eux43cux435ux43dux434ux430ux446ux438ux438-ux43fux43e-ux43fux440ux43eux445ux43eux436ux434ux435ux43dux438ux44e-ux43aux443ux440ux441ux430}}
+\addcontentsline{toc}{section}{Рекомендации по прохождению курса}
+
+Данный курс состоит из 5 видео уроков общей длительность 1 час 2 минуты. К каждому уроку есть рассмотренный в видео код, это сделано для вашего удобства, скопируйте его и выполняйте по мере просмотра видео лекции.
+
+К каждому уроке есть упражнения, их выполнение не является обязательным, но поможет вам понять усвоили ли вы материал урока. Все упражнения достаточно простые, и зачастую не заберут у вас более 5 - 10 минут. Решение каждого упражнения можно найти в разделе \href{решения-заданий.html}{``Решение заданий''}.
+
+\hypertarget{ux43eux431-ux430ux432ux442ux43eux440ux435}{%
+\section*{Об авторе}\label{ux43eux431-ux430ux432ux442ux43eux440ux435}}
+\addcontentsline{toc}{section}{Об авторе}
+
+Меня зовут Алексей Селезнёв, с 2008 года я являюсь практикующим аналитиком. На данный момент основной моей деятельностью является развитие отдела аналитики в агентстве интернет-маркетинга Netpeak.
+
+Мною были разработаны такие R пакеты как: \texttt{ryandexdirect}, \texttt{rfacebookstat}, \texttt{timeperiodsR}, \texttt{rvkstat} и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 130 000 раз.
+
+Также я являюсь автором курса \href{https://needfordata.ru/r}{``Язык R для интернет-маркетинга''}.
+
+Веду свой авторский \href{https://t.me/R4marketing}{Telegram} и \href{https://www.youtube.com/R4marketing/?sub_confirmation=1}{YouTube} канал R4marketing. Буду рад видеть вас в рядах подписчиков.
+
+Периодически публикую статью на различных интернет медиа, зачастую это \href{https://habr.com/ru/users/selesnow/}{Хабр} и \href{https://netpeak.net/ru/blog/user/publication/826/}{Netpeak Journal}.
+
+Неоднократно выступал на профильных конференциях по аналитике и интернет маркетингу, среди которых Матемаркетинг, GoAnalytics, Analyze, eCommerce, 8P и прочие.
+
+Начиная с 2016 года всячески стараюсь популяризировать язык R среди русскоязычных аналитиков и маркетологов. Этот курс также был создан с этой целью.
+
+\hypertarget{ux43fux440ux43eux433ux440ux430ux43cux43cux430-ux43aux443ux440ux441ux430}{%
+\section*{Программа курса}\label{ux43fux440ux43eux433ux440ux430ux43cux43cux430-ux43aux443ux440ux441ux430}}
+\addcontentsline{toc}{section}{Программа курса}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{функции-select-rename_with-и-relocate.html}{Функции select(), rename\_with() и relocate()}
+\item
+  \href{функция-across.html}{Функция across()}
+\item
+  \href{перебор-строк-функцией-rowwise.html}{Перебор строк функцией rowwise()}
+\item
+  \href{обновлённая-функция-summarise.html}{Обновлённая функция summarise()}
+\item
+  \href{добавление-изменение-и-удаление-строк-дата-фрейма-через-rows_.html}{Добавление, изменение и удаление строк дата фрейма через rows\_*()}
+\end{enumerate}
+
+\hypertarget{ux431ux43bux430ux433ux43eux434ux430ux440ux43dux43eux441ux442ux438}{%
+\section*{Благодарности}\label{ux431ux43bux430ux433ux43eux434ux430ux440ux43dux43eux441ux442ux438}}
+\addcontentsline{toc}{section}{Благодарности}
+
+Курс, и все сопутствующие материалы предоставляются бесплатно, но если у вас есть желание отблагодарить автора за этот видео курс вы можете перечислить любую произвольную сумму на \href{https://secure.wayforpay.com/payment/r4excel_users}{этой странице}.
+
+Либо с помощью кнопки:
+
+{Оплатить}
+
+\hypertarget{ux444ux443ux43dux43aux446ux438ux438-select-rename_with-ux438-relocate}{%
+\chapter{Функции select(), rename\_with() и relocate()}\label{ux444ux443ux43dux43aux446ux438ux438-select-rename_with-ux438-relocate}}
+
+\hypertarget{ux43eux43fux438ux441ux430ux43dux438ux435}{%
+\section{Описание}\label{ux43eux43fux438ux441ux430ux43dux438ux435}}
+
+Первый урок курса посвящён таким операциям, как продвинутый выбор столбцов, их переименование и изменения порядка столбцов таблицы.
+
+В этом видео уроке мы познакомимся с такими функциями как: \texttt{select()}, \texttt{rename\_with()}, \texttt{relocate()}, \texttt{any\_of()}, \texttt{all\_of()}.
+
+В основе урока лежит статья \href{https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-select-rename-relocate/}{``dplyr 1.0.0: select, rename, relocate''}.
+
+\hypertarget{ux432ux438ux434ux435ux43e}{%
+\section{Видео}\label{ux432ux438ux434ux435ux43e}}
+
+\hypertarget{ux43aux43eux434}{%
+\section{Код}\label{ux43aux43eux434}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#devtools::install\_github("tidyverse/dplyr")}
+\FunctionTok{library}\NormalTok{(dplyr, }\AttributeTok{warn.conflicts =} \ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\# rename}
+\CommentTok{\# Переименовать столбцы для устранение дублирования их имён}
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\AttributeTok{a =} \DecValTok{5}\SpecialCharTok{:}\DecValTok{1}\NormalTok{, }\AttributeTok{.name\_repair =} \StringTok{"minimal"}\NormalTok{)}
+\NormalTok{df1}
+
+\NormalTok{df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rename}\NormalTok{(}\AttributeTok{b =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# select}
+\CommentTok{\# обращение к столбцам по типу}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x1 =} \DecValTok{1}\NormalTok{, }\AttributeTok{x2 =} \StringTok{"a"}\NormalTok{, }\AttributeTok{x3 =} \DecValTok{2}\NormalTok{, }\AttributeTok{y1 =} \StringTok{"b"}\NormalTok{, }\AttributeTok{y2 =} \DecValTok{3}\NormalTok{, }\AttributeTok{y3 =} \StringTok{"c"}\NormalTok{, }\AttributeTok{y4 =} \DecValTok{4}\NormalTok{)}
+
+\CommentTok{\# числовые столбцы}
+\NormalTok{df2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(is.numeric)}
+\CommentTok{\# НЕ текстовые столбцы}
+\NormalTok{df2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{!}\NormalTok{is.character)}
+
+\CommentTok{\# смешанный тип обращения}
+\CommentTok{\# числовые стобцы, название которых начинается на X}
+\NormalTok{df2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"x"}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ is.numeric)}
+
+
+\CommentTok{\# выбор полей с помощью функций any\_of и all\_of}
+\NormalTok{vars }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"x1"}\NormalTok{, }\StringTok{"x2"}\NormalTok{, }\StringTok{"y1"}\NormalTok{, }\StringTok{"z"}\NormalTok{)}
+\NormalTok{df2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{any\_of}\NormalTok{(vars))}
+
+\NormalTok{df2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(vars))}
+
+
+\CommentTok{\# функция rename\_with}
+\NormalTok{df2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rename\_with}\NormalTok{(toupper)}
+
+\NormalTok{df2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rename\_with}\NormalTok{(toupper, }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"x"}\NormalTok{))}
+
+\NormalTok{df2 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rename\_with}\NormalTok{(toupper, is.numeric)}
+
+
+\CommentTok{\# relocate для изменения порядка стобцов}
+\NormalTok{df3 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{w =} \DecValTok{0}\NormalTok{, }\AttributeTok{x =} \DecValTok{1}\NormalTok{, }\AttributeTok{y =} \StringTok{"a"}\NormalTok{, }\AttributeTok{z =} \StringTok{"b"}\NormalTok{)}
+\CommentTok{\# переместить столбцы y, z в начало}
+\NormalTok{df3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{relocate}\NormalTok{(y, z)}
+\CommentTok{\# переместить текстовые столбцы вначало}
+\NormalTok{df3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{relocate}\NormalTok{(is.character)}
+
+\CommentTok{\# поместить столбец w после y}
+\NormalTok{df3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{relocate}\NormalTok{(w, }\AttributeTok{.after =}\NormalTok{ y)}
+\CommentTok{\# поместить столбец w перед y}
+\NormalTok{df3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{relocate}\NormalTok{(w, }\AttributeTok{.before =}\NormalTok{ y)}
+\CommentTok{\# переместить w в конец}
+\NormalTok{df3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{relocate}\NormalTok{(w, }\AttributeTok{.after =} \FunctionTok{last\_col}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux443ux43fux440ux430ux436ux43dux435ux43dux438ux44f}{%
+\section{Упражнения}\label{ux443ux43fux440ux430ux436ux43dux435ux43dux438ux44f}}
+
+Для примера мы будем использовать встроенный набор данных \texttt{iris}, выполните следующие действия:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Выберите все столбцы, которые заканчиваются на \texttt{Width}.
+\item
+  Переместите с помощью функции \texttt{relocate()} единственный текстовый столбец в левую часть таблицы.
+\item
+  Замените с помощью функции \texttt{rename\_with()} в названии столбцов точку на нижнее подчёркивание, и преобразуйте имена в нижний регистр.
+\end{enumerate}
+
+\hypertarget{ux444ux443ux43dux43aux446ux438ux44f-across}{%
+\chapter{Функция across()}\label{ux444ux443ux43dux43aux446ux438ux44f-across}}
+
+\hypertarget{ux43eux43fux438ux441ux430ux43dux438ux435-1}{%
+\section{Описание}\label{ux43eux43fux438ux441ux430ux43dux438ux435-1}}
+
+В этом уроке продемонстрирована работа с новой функцией \texttt{across()}, которая упрощает обращение к столбцам внутри таких функций как \texttt{mutate()} и \texttt{summarise()}. По сути функция \texttt{across()} заменяет функции с приставками \texttt{*\_at()} , \texttt{*\_if()}, \texttt{*\_all()}.
+
+Обзор основан на статье Хедли Викхема \href{https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/}{``dplyr 1.0.0: working across columns''}.
+
+\hypertarget{ux432ux438ux434ux435ux43e-1}{%
+\section{Видео}\label{ux432ux438ux434ux435ux43e-1}}
+
+\hypertarget{ux43aux43eux434-1}{%
+\section{Код}\label{ux43aux43eux434-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# devtools::install\_github("tidyverse/dplyr")}
+\FunctionTok{library}\NormalTok{(dplyr, }\AttributeTok{warn.conflicts =} \ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\# тестовый дата фрейм}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{g1 =} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{sample}\NormalTok{(letters[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{],}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T )),}
+             \AttributeTok{g2 =} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{sample}\NormalTok{(LETTERS[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{],}\AttributeTok{size =} \DecValTok{10}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T )),}
+             \AttributeTok{a  =} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{),}
+             \AttributeTok{b  =} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+             \AttributeTok{c  =} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{30}\NormalTok{),}
+             \AttributeTok{d  =} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{50}\NormalTok{))}
+
+\CommentTok{\# о чём пойдёт речь}
+\DocumentationTok{\#\# копирование кода, когда требуется }
+\DocumentationTok{\#\# произвести одну и туже операцию с разными функциями}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(g1, g2) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{a =} \FunctionTok{mean}\NormalTok{(a), }\AttributeTok{b =} \FunctionTok{mean}\NormalTok{(b), }\AttributeTok{c =} \FunctionTok{mean}\NormalTok{(c), }\AttributeTok{d =} \FunctionTok{mean}\NormalTok{(c))}
+
+\CommentTok{\# новый способ}
+\DocumentationTok{\#\# теперь для таких преобразований можно}
+\DocumentationTok{\#\# использовать тот же синтаксис что и в select()}
+\DocumentationTok{\#\#\# посчитать среднее по столбцам от a до d}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(g1, g2) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(a}\SpecialCharTok{:}\NormalTok{d, mean))}
+
+\DocumentationTok{\#\#\# или посчитать среднее выбрав все числовые столбцы }
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(g1, g2) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(is.numeric, mean))}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# Простой пример}
+\CommentTok{\# аргументы функции accros}
+
+\DocumentationTok{\#\# .cols {-} выбор столбцов по позиции, имени, функцией, типу данных, или комбинируя любые перечисленные способы}
+\DocumentationTok{\#\# .fns {-} функция, или список функций которые необходимо применить к каждому столбцу}
+
+\DocumentationTok{\#\# считаем количество униклаьных значений в текстовых полях}
+\NormalTok{starwars }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(is.character, n\_distinct))}
+
+\DocumentationTok{\#\# пример с фильтрацией данных}
+\NormalTok{starwars }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{n}\NormalTok{() }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(sex, gender, homeworld), n\_distinct))}
+
+\DocumentationTok{\#\# комбинируем accross с другими вычислениями}
+\NormalTok{starwars }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(homeworld) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{n}\NormalTok{() }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(is.numeric, mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }
+            \AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# Чем accross лучше предыдущих функций с суфиксами \_at, \_if, \_all}
+
+\DocumentationTok{\#\# 1. accross позволяет комбинировать различные вычисления внутри одной summarise }
+\DocumentationTok{\#\# пример из статьи}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(g1, g2) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}
+    \FunctionTok{across}\NormalTok{(is.numeric, mean), }
+    \FunctionTok{across}\NormalTok{(is.factor, nlevels),}
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{(), }
+\NormalTok{  )}
+
+\DocumentationTok{\#\# рабочий пример}
+\NormalTok{starwars }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(is.character, n\_distinct), }
+            \FunctionTok{across}\NormalTok{(is.numeric, mean), }
+            \FunctionTok{across}\NormalTok{(is.list, length), }
+            \AttributeTok{n =} \FunctionTok{n}\NormalTok{()}
+\NormalTok{  )}
+
+\DocumentationTok{\#\# 2. уменьшает количество необходимых функций в dplyr, что облегчает их запоминание}
+\DocumentationTok{\#\# 3. объединяет возможности функций с суфиксами if\_, at\_, и даёт возможность объединять их возможности}
+\DocumentationTok{\#\# 4. accross не требует от вас использования функции vars для указания нужных столбцлв, как это было раньше}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# перевод старого кода на accross}
+
+\DocumentationTok{\#\# для перевода функций с суфиксами \_at, \_if, \_all используйте следующие правила}
+\DocumentationTok{\#\#\# в accross первым агрументом будет:}
+\DocumentationTok{\#\#\# Для *\_if() старый второй аргумент.}
+\DocumentationTok{\#\#\# Для *\_at() старый второй аргумент с удаленным вызовом vars().}
+\DocumentationTok{\#\#\# Для *\_all(), в качестве первого аргумента передайте функцию everything()}
+
+\DocumentationTok{\#\# примеры}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{y\_a  =} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{),}
+             \AttributeTok{y\_b  =} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{),}
+             \AttributeTok{x    =} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{30}\NormalTok{),}
+             \AttributeTok{d    =} \FunctionTok{runif}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{50}\NormalTok{))}
+
+\DocumentationTok{\#\#\# из \_if в accross}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate\_if}\NormalTok{(is.numeric, mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# {-}\textgreater{}}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(is.numeric, mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# из \_at в accross}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(}\FunctionTok{c}\NormalTok{(x, }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"y"}\NormalTok{))), mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# {-}\textgreater{}}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(x, }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"y"}\NormalTok{)), mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+
+\DocumentationTok{\#\#\# из \_all в accroos}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate\_all}\NormalTok{(mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# {-}\textgreater{}}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{everything}\NormalTok{(), mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux443ux43fux440ux430ux436ux435ux43dux435ux43dux438ux44f}{%
+\section{Упраженения}\label{ux443ux43fux440ux430ux436ux435ux43dux435ux43dux438ux44f}}
+
+Как и в предыдущем уроке выполнять упражнения необходимо на таблице \texttt{iris}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Используйте функцию \texttt{across()}, и разделите значения полей имена которых заканчиваются на \texttt{Length} на среднее значение по этим же столбцам.
+\item
+  Посчитайте среднее значение столбцов, имена которых начинаются на \texttt{Sepal} сгруппировав данные по столбцу \texttt{Species}.
+\end{enumerate}
+
+\hypertarget{ux43fux435ux440ux435ux431ux43eux440-ux441ux442ux440ux43eux43a-ux444ux443ux43dux43aux446ux438ux435ux439-rowwise}{%
+\chapter{Перебор строк функцией rowwise()}\label{ux43fux435ux440ux435ux431ux43eux440-ux441ux442ux440ux43eux43a-ux444ux443ux43dux43aux446ux438ux435ux439-rowwise}}
+
+\hypertarget{ux43eux43fux438ux441ux430ux43dux438ux435-2}{%
+\section{Описание}\label{ux43eux43fux438ux441ux430ux43dux438ux435-2}}
+
+В этом видео мы разберёмся с функцией \texttt{rowwise()}, из пакета \texttt{dplyr}.
+
+Данная функция позволяет вам осуществить перебор строк таблицы не прибегая к циклам и функциям семейства \texttt{apply} или им подобным.
+
+В основе урока лежит статья \href{https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-rowwise/}{``dplyr 1.0.0: working within rows''}.
+
+\hypertarget{ux432ux438ux434ux435ux43e-2}{%
+\section{Видео}\label{ux432ux438ux434ux435ux43e-2}}
+
+\hypertarget{ux43aux43eux434-2}{%
+\section{Код}\label{ux43aux43eux434-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#devtools::install\_github("tidyverse/dplyr")}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{\# test data}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{student\_id =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }
+  \AttributeTok{test1 =} \DecValTok{10}\SpecialCharTok{:}\DecValTok{13}\NormalTok{, }
+  \AttributeTok{test2 =} \DecValTok{20}\SpecialCharTok{:}\DecValTok{23}\NormalTok{, }
+  \AttributeTok{test3 =} \DecValTok{30}\SpecialCharTok{:}\DecValTok{33}\NormalTok{, }
+  \AttributeTok{test4 =} \DecValTok{40}\SpecialCharTok{:}\DecValTok{43}
+\NormalTok{)}
+
+\NormalTok{df}
+
+\CommentTok{\# попытка посчитать среднюю оценку по студету}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{avg =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(test1, test2, test3, test4)))}
+
+\CommentTok{\# используем rowwise для преобразования фрейма}
+\NormalTok{rf }\OtherTok{\textless{}{-}} \FunctionTok{rowwise}\NormalTok{(df, student\_id)}
+\NormalTok{rf}
+
+\NormalTok{rf }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{avg =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(test1, test2, test3, test4)))}
+
+\CommentTok{\# тоже самое с использованием c\_across}
+\NormalTok{rf }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{avg =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"test"}\NormalTok{))))}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# некоторые арифметические операции векторизированы по умолчанию}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{total =}\NormalTok{ test1 }\SpecialCharTok{+}\NormalTok{ test2 }\SpecialCharTok{+}\NormalTok{ test3 }\SpecialCharTok{+}\NormalTok{ test4)}
+
+\CommentTok{\# этот подход можно использовать для вычисления среднего}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{avg =}\NormalTok{ (test1 }\SpecialCharTok{+}\NormalTok{ test2 }\SpecialCharTok{+}\NormalTok{ test3 }\SpecialCharTok{+}\NormalTok{ test4) }\SpecialCharTok{/} \DecValTok{4}\NormalTok{)}
+
+\CommentTok{\# так же вы можете использовать некоторые специальные функции}
+\CommentTok{\# для вычисления некоторых статистик}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}
+  \AttributeTok{min =} \FunctionTok{pmin}\NormalTok{(test1, test2, test3, test4), }
+  \AttributeTok{max =} \FunctionTok{pmax}\NormalTok{(test1, test2, test3, test4), }
+  \AttributeTok{string =} \FunctionTok{paste}\NormalTok{(test1, test2, test3, test4, }\AttributeTok{sep =} \StringTok{"{-}"}\NormalTok{)}
+\NormalTok{)}
+\CommentTok{\# все векторизированные функции будут работать быстрее чем rowwise}
+\CommentTok{\# но rowwise позволяет векторизировать любую функцию}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# работа со столбцами списками}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{x =} \FunctionTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{),}
+  \AttributeTok{y =} \FunctionTok{list}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\DecValTok{1}\NormalTok{, }\StringTok{"a"}\NormalTok{),}
+  \AttributeTok{z =} \FunctionTok{list}\NormalTok{(sum, mean, sd)}
+\NormalTok{)}
+
+\CommentTok{\# мы можем перебором обработать каждый список}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{x\_length =} \FunctionTok{length}\NormalTok{(x),}
+    \AttributeTok{y\_type =} \FunctionTok{typeof}\NormalTok{(y),}
+    \AttributeTok{z\_call =} \FunctionTok{z}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)}
+\NormalTok{  )}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# симуляция случайных данных}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tribble}\NormalTok{(}
+  \SpecialCharTok{\textasciitilde{}}\NormalTok{id, }\SpecialCharTok{\textasciitilde{}}\NormalTok{ n, }\SpecialCharTok{\textasciitilde{}}\NormalTok{ min, }\SpecialCharTok{\textasciitilde{}}\NormalTok{ max,}
+  \DecValTok{1}\NormalTok{,   }\DecValTok{3}\NormalTok{,     }\DecValTok{0}\NormalTok{,     }\DecValTok{1}\NormalTok{,}
+  \DecValTok{2}\NormalTok{,   }\DecValTok{2}\NormalTok{,    }\DecValTok{10}\NormalTok{,   }\DecValTok{100}\NormalTok{,}
+  \DecValTok{3}\NormalTok{,   }\DecValTok{2}\NormalTok{,   }\DecValTok{100}\NormalTok{,  }\DecValTok{1000}\NormalTok{,}
+\NormalTok{)}
+
+\CommentTok{\# используем rowwise для симуляции данных}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rowwise}\NormalTok{(id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{data =} \FunctionTok{list}\NormalTok{(}\FunctionTok{runif}\NormalTok{(n, min, max)))}
+
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rowwise}\NormalTok{(id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{x =} \FunctionTok{runif}\NormalTok{(n, min, max))}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# функция nest\_by позволяет создавать столбцы списки}
+\NormalTok{by\_cyl }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{nest\_by}\NormalTok{(cyl)}
+\NormalTok{by\_cyl}
+
+\CommentTok{\# такой подход удобно использовать при построении линейной модели}
+\CommentTok{\# используем mutate для подгонки моели под каждую группа данных}
+\NormalTok{by\_cyl }\OtherTok{\textless{}{-}}\NormalTok{ by\_cyl }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{model =} \FunctionTok{list}\NormalTok{(}\FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wt, }\AttributeTok{data =}\NormalTok{ data)))}
+\NormalTok{by\_cyl}
+\CommentTok{\# теперь с помощью summarise }
+\CommentTok{\# можно извлекать сводки или коэфициенты построенной модели}
+\NormalTok{by\_cyl }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise}\NormalTok{(broom}\SpecialCharTok{::}\FunctionTok{glance}\NormalTok{(model))}
+\NormalTok{by\_cyl }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise}\NormalTok{(broom}\SpecialCharTok{::}\FunctionTok{tidy}\NormalTok{(model))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux443ux43fux440ux430ux436ux43dux435ux43dux438ux44f-1}{%
+\section{Упражнения}\label{ux443ux43fux440ux430ux436ux43dux435ux43dux438ux44f-1}}
+
+В этот раз тестовые данные для выполнения упражнения мы будем генерировать самостоятельно, используйте приведённый ниже код.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# тестовый набор данных}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{400}\NormalTok{)}
+\NormalTok{year }\OtherTok{\textless{}{-}} \DecValTok{2000}\SpecialCharTok{:}\DecValTok{2005}
+\NormalTok{sales }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}
+\NormalTok{  month.abb, }
+  \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{round}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\AttributeTok{n =} \DecValTok{6}\NormalTok{, }\AttributeTok{min =} \DecValTok{100}\NormalTok{, }\AttributeTok{max =} \DecValTok{400}\NormalTok{), }\DecValTok{0}\NormalTok{)}
+\NormalTok{  )}
+
+\NormalTok{sales }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(sales, }\AttributeTok{row.names =}\NormalTok{ year)}
+\NormalTok{sales}\SpecialCharTok{$}\NormalTok{year }\OtherTok{\textless{}{-}}\NormalTok{ year}
+\NormalTok{sales}
+\CommentTok{\#\textgreater{}      Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec year}
+\CommentTok{\#\textgreater{} 2000 145 174 342 185 117 313 314 102 382 220 226 297 2000}
+\CommentTok{\#\textgreater{} 2001 156 251 286 280 179 176 317 323 247 194 233 263 2001}
+\CommentTok{\#\textgreater{} 2002 319 182 329 155 240 177 146 244 370 300 197 187 2002}
+\CommentTok{\#\textgreater{} 2003 209 187 238 296 393 234 366 314 198 213 206 234 2003}
+\CommentTok{\#\textgreater{} 2004 379 126 263 261 136 201 352 351 362 203 304 183 2004}
+\CommentTok{\#\textgreater{} 2005 221 275 374 318 127 376 257 193 340 190 225 273 2005}
+\end{Highlighting}
+\end{Shaded}
+
+В результате вы получили продаж, каждая строка которой хранит данные за определённый год, а каждый столбец за определённый месяц года.
+
+Ваша задача не переворачивая таблицу, добавить в неё 4 столбца:
+
+\begin{itemize}
+\tightlist
+\item
+  winter\_avg\_sales - средний объём продаж за зимные месяца;
+\item
+  spring\_avg\_sales - средний объём продаж за весенние месяца;
+\item
+  summer\_avg\_sales - средний объём продаж за летние месяца;
+\item
+  autumn\_avg\_sales - средний объём продаж за осенние месяца;
+\end{itemize}
+
+И оставить из исходной таблицы только столбец с обозначением года, и рассчитанные на предыдущем шаге столбцы.
+
+Результат вычислений будет выглядить вот так:
+
+\begin{verbatim}
+# A tibble: 6 x 5
+# Rowwise: 
+   year winter_avg_sales spring_avg_sales summer_avg_sales autumn_avg_sales
+  <int>            <dbl>            <dbl>            <dbl>            <dbl>
+1  2000              322             226              145              227 
+2  2001              174             192.             179.             295.
+3  2002              106             352.             215.             258.
+4  2003              105             260.             334.             206.
+5  2004              167             192.             239              254.
+6  2005              210             191.             271.             235 
+\end{verbatim}
+
+\hypertarget{ux43eux431ux43dux43eux432ux43bux451ux43dux43dux430ux44f-ux444ux443ux43dux43aux446ux438ux44f-summarise}{%
+\chapter{Обновлённая функция summarise()}\label{ux43eux431ux43dux43eux432ux43bux451ux43dux43dux430ux44f-ux444ux443ux43dux43aux446ux438ux44f-summarise}}
+
+\hypertarget{ux43eux43fux438ux441ux430ux43dux438ux435-3}{%
+\section{Описание}\label{ux43eux43fux438ux441ux430ux43dux438ux435-3}}
+
+В этом уроке мы рассмотрим новые возможности функции \texttt{summarise()}.
+
+Урок основан на статье \href{https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-summarise/}{``dplyr 1.0.0: new summarise() features''}.
+
+\hypertarget{ux432ux438ux434ux435ux43e-3}{%
+\section{Видео}\label{ux432ux438ux434ux435ux43e-3}}
+
+\hypertarget{ux43aux43eux434-3}{%
+\section{Код}\label{ux43aux43eux434-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#devtools::install\_github("tidyverse/dplyr")}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{\# Основные изменения}
+\DocumentationTok{\#\# теперь sunnarise может вернуть}
+\DocumentationTok{\#\#\# вектор любой длинны}
+\DocumentationTok{\#\#\# дата фрейм любой размерности}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# тестовые данные}
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{grp =} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\AttributeTok{each =} \DecValTok{5}\NormalTok{), }
+  \AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{0.25}\NormalTok{, }\DecValTok{1}\NormalTok{), }\FunctionTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{1.5}\NormalTok{)),}
+  \AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\DecValTok{1}\NormalTok{), }\FunctionTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{0.5}\NormalTok{)),}
+\NormalTok{)}
+
+\NormalTok{df}
+
+\CommentTok{\# получим минимальные и максимальные значения для каждой группы}
+\CommentTok{\# и поместим эти значения в строки}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(grp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{rng =} \FunctionTok{range}\NormalTok{(x))}
+
+\DocumentationTok{\#\# функция range возвращает вектор длинны 2}
+\FunctionTok{range}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{x)}
+\DocumentationTok{\#\# но функция summarise разворачивает его, }
+\DocumentationTok{\#\# приводя каждое из возвращаемых значений в новую строку}
+
+\CommentTok{\# тоже самое, но для столбцов}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(grp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{tibble}\NormalTok{(}\AttributeTok{min =} \FunctionTok{min}\NormalTok{(x), }\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(x)))}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# Расчёт квантилей}
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(grp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{x =} \FunctionTok{quantile}\NormalTok{(x, }\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{)), }\AttributeTok{q =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{))}
+
+\CommentTok{\# можем избежать дублирования кода и написать функцию для вычисления квантиля}
+\NormalTok{quibble }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{q =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{)) \{}
+  \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =} \FunctionTok{quantile}\NormalTok{(x, q), }\AttributeTok{q =}\NormalTok{ q)}
+\NormalTok{\}}
+\CommentTok{\# используем собственную функцию в summarise}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(grp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{quibble}\NormalTok{(x, }\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{)))}
+
+\CommentTok{\# доработаем функцию таким образом }
+\CommentTok{\# что бы названия столбца подтягивались из аргумена}
+\NormalTok{quibble2 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{q =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{)) \{}
+  \FunctionTok{tibble}\NormalTok{(}\StringTok{"\{\{ x \}\}"} \SpecialCharTok{:}\ErrorTok{=} \FunctionTok{quantile}\NormalTok{(x, q), }\StringTok{"\{\{ x \}\}\_q"} \SpecialCharTok{:}\ErrorTok{=}\NormalTok{ q)}
+\NormalTok{\}}
+
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(grp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{quibble2}\NormalTok{(x, }\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{)))}
+
+
+\CommentTok{\# мы не присваивали имена новых столбцов внутри summarise}
+\CommentTok{\# потому что если функция возвращает объект сложной стурктуры}
+\CommentTok{\# мы получим вложенные дата фреймы}
+\NormalTok{out }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(grp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{quantile =} \FunctionTok{quibble2}\NormalTok{(y, }\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.75}\NormalTok{)))}
+
+\FunctionTok{str}\NormalTok{(out)}
+
+\CommentTok{\# обращаемся к вложенному фрейму}
+\NormalTok{out}\SpecialCharTok{$}\NormalTok{y}
+
+\CommentTok{\# или к его столбцам}
+\CommentTok{\# по смыслу такая конструкция напоминает объяденённые имена стобцов в электронных таблицах}
+\NormalTok{out}\SpecialCharTok{$}\NormalTok{quantile}\SpecialCharTok{$}\NormalTok{y\_q}
+
+\CommentTok{\# summarise + rowwise}
+\CommentTok{\# эта комбинация функций теперь может заменить purrr и apply}
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{path =} \FunctionTok{dir}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.csv$"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rowwise}\NormalTok{(path) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(readr}\SpecialCharTok{::}\FunctionTok{read\_csv}\NormalTok{(path))}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# Предыдущие подходы}
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# вычисляем квантили}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(grp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{y =} \FunctionTok{list}\NormalTok{(}\FunctionTok{quibble}\NormalTok{(y, }\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.75}\NormalTok{)))) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{unnest}\NormalTok{(y)}
+
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(grp) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{do}\NormalTok{(}\FunctionTok{quibble}\NormalTok{(.}\SpecialCharTok{$}\NormalTok{y, }\FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.75}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux443ux43fux440ux430ux436ux43dux435ux43dux438ux435}{%
+\section{Упражнение}\label{ux443ux43fux440ux430ux436ux43dux435ux43dux438ux435}}
+
+Вам дана таблица параметров генерации случайной выборки с нормальным распределением (генерировать случайную выборку с нормальным распределением позволяет функция \texttt{rnorm()}).
+
+Для генерации таблицы параметров выполните следующий код:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{params }\OtherTok{\textless{}{-}} \FunctionTok{tribble}\NormalTok{(}
+ \SpecialCharTok{\textasciitilde{}}\NormalTok{sim, }\SpecialCharTok{\textasciitilde{}}\NormalTok{n, }\SpecialCharTok{\textasciitilde{}}\NormalTok{mean, }\SpecialCharTok{\textasciitilde{}}\NormalTok{sd,}
+    \DecValTok{1}\NormalTok{,  }\DecValTok{4}\NormalTok{,     }\DecValTok{1}\NormalTok{,   }\DecValTok{5}\NormalTok{,}
+    \DecValTok{2}\NormalTok{,  }\DecValTok{7}\NormalTok{,     }\DecValTok{2}\NormalTok{,   }\DecValTok{10}\NormalTok{,}
+    \DecValTok{3}\NormalTok{,  }\DecValTok{10}\NormalTok{,   }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,   }\DecValTok{25}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Теперь сгенерируйте согласно этим параметрам таблицу содержащую в столбце \texttt{sim} номер строки таблицы параметров, а в столбце \texttt{val} сами значения случайных распределений. Для воспроизводимости результатов установите счётчик генерации случайных чисел в позиции 400 (\texttt{set.seed(400)}). Тогда итоговый результат будет иметь следующий вид:
+
+\begin{verbatim}
+# A tibble: 21 x 2
+# Groups:   sim [3]
+     sim   val
+   <dbl> <dbl>
+ 1     1 -1.75
+ 2     1 -3.70
+ 3     1  2.27
+ 4     1 13.2 
+ 5     2  9.87
+ 6     2 -5.14
+ 7     2 -8.09
+ 8     2 -3.57
+ 9     2  6.77
+10     2 29.4 
+# ... with 11 more rows
+\end{verbatim}
+
+\hypertarget{ux434ux43eux431ux430ux432ux43bux435ux43dux438ux435-ux438ux437ux43cux435ux43dux435ux43dux438ux435-ux438-ux443ux434ux430ux43bux435ux43dux438ux435-ux441ux442ux440ux43eux43a-ux434ux430ux442ux430-ux444ux440ux435ux439ux43cux430-ux447ux435ux440ux435ux437-rows_}{%
+\chapter{Добавление, изменение и удаление строк дата фрейма через rows\_*()}\label{ux434ux43eux431ux430ux432ux43bux435ux43dux438ux435-ux438ux437ux43cux435ux43dux435ux43dux438ux435-ux438-ux443ux434ux430ux43bux435ux43dux438ux435-ux441ux442ux440ux43eux43a-ux434ux430ux442ux430-ux444ux440ux435ux439ux43cux430-ux447ux435ux440ux435ux437-rows_}}
+
+\hypertarget{ux43eux43fux438ux441ux430ux43dux438ux435-4}{%
+\section{Описание}\label{ux43eux43fux438ux441ux430ux43dux438ux435-4}}
+
+В SQL мы часто используем операции изменения данных, такие как \texttt{INSERT}, \texttt{UPDATE} и \texttt{DELETE}, так вот начиная с версии \texttt{dplyr} 1.0.0 в пакете появилось целое семейство функций которые реализуют эти операции с фреймами на языке R.
+
+Функции которые будут рассмотрены в этом видео:
+- \texttt{rows\_insert()}
+- \texttt{rows\_update()}
+- \texttt{rows\_upsert()}
+- \texttt{rows\_patch()}
+- \texttt{rows\_delete()}
+
+Также мы разберёмся с новым аргументом функции \texttt{summarise()}, \texttt{.groups}, который позволяет изменять группировку данных после их агрегации.
+
+В основе урока лежит статья \href{https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/}{``dplyr 1.0.0: last minute additions''}.
+
+\hypertarget{ux432ux438ux434ux435ux43e-4}{%
+\section{Видео}\label{ux432ux438ux434ux435ux43e-4}}
+
+\hypertarget{ux43aux43eux434-4}{%
+\section{Код}\label{ux43aux43eux434-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#devtools::install\_github("tidyverse/dplyr")}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{\# summarise + .groups}
+\NormalTok{starwars }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(homeworld, species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{n}\NormalTok{())}
+
+\DocumentationTok{\#\# аргумент .groups}
+\DocumentationTok{\#\#\# .groups = "drop\_last" удалит последнюю группу}
+\DocumentationTok{\#\#\# .groups = "drop" удалит всю группировку}
+\DocumentationTok{\#\#\# .groups = "keep" созранит всю группировку}
+\DocumentationTok{\#\#\# .groups = "rowwise" разобъёт фрейм на группы как rowwise()}
+
+\CommentTok{\# rows\_*()}
+\DocumentationTok{\#\# rows\_update(x, y) обновляет строки в таблице x найденные в таблице y}
+\DocumentationTok{\#\# rows\_patch(x, y) работает аналогично rows\_update() но заменяет только NA}
+\DocumentationTok{\#\# rows\_insert(x, y) добавляет строки в таблицу x из таблицы y}
+\DocumentationTok{\#\# rows\_upsert(x, y) обновляет найденные строки в x и добавляет не найденные из таблицы y}
+\DocumentationTok{\#\# rows\_delete(x, y) удаляет строки из x найденные в таблице y.}
+
+\CommentTok{\# Создаём тестовые данные}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\AttributeTok{b =}\NormalTok{ letters[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\ConstantTok{NA}\NormalTok{)], }\AttributeTok{c =} \FloatTok{0.5} \SpecialCharTok{+} \DecValTok{0}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)}
+\NormalTok{df}
+
+\NormalTok{new }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{), }\AttributeTok{b =} \FunctionTok{c}\NormalTok{(}\StringTok{"d"}\NormalTok{, }\StringTok{"e"}\NormalTok{), }\AttributeTok{c =} \FunctionTok{c}\NormalTok{(}\FloatTok{3.5}\NormalTok{, }\FloatTok{4.5}\NormalTok{))}
+\NormalTok{new}
+
+\CommentTok{\# БАзовые примеры}
+\DocumentationTok{\#\# добавляем новые строки}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rows\_insert}\NormalTok{(new)}
+
+\DocumentationTok{\#\# row\_insert вернёт ошибку если мы попытаемся добавить уже существующую строку}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rows\_insert}\NormalTok{(}\FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \DecValTok{3}\NormalTok{, }\AttributeTok{b =} \StringTok{"c"}\NormalTok{))}
+
+\DocumentationTok{\#\# если вы хотите обновить существующее значение необходимо использовать row\_update}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rows\_update}\NormalTok{(}\FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \DecValTok{3}\NormalTok{, }\AttributeTok{b =} \StringTok{"c"}\NormalTok{))}
+
+\DocumentationTok{\#\# но rows\_update вернёт ошибку если вы попытаетесь обновить несуществующее значание}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{rows\_update}\NormalTok{(}\FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \DecValTok{4}\NormalTok{, }\AttributeTok{b =} \StringTok{"d"}\NormalTok{))}
+
+\DocumentationTok{\#\# rows\_patch заполнит только пропущенные значения по ключу}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rows\_patch}\NormalTok{(}\FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\AttributeTok{b =} \StringTok{"B"}\NormalTok{))}
+
+\DocumentationTok{\#\# rows\_upsert также вы можете добавлять новые и заменять существуюие значения }
+\DocumentationTok{\#\# функцией rows\_upsert}
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rows\_upsert}\NormalTok{(}\FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \DecValTok{3}\NormalTok{, }\AttributeTok{b =} \StringTok{"c"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rows\_upsert}\NormalTok{(}\FunctionTok{tibble}\NormalTok{(}\AttributeTok{a =} \DecValTok{4}\NormalTok{, }\AttributeTok{b =} \StringTok{"d"}\NormalTok{))}
+
+\CommentTok{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# РАЗБЕРЁМ Аргументы немного более подробно}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{555}\NormalTok{)}
+
+\CommentTok{\# менеджеры}
+\NormalTok{managers }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Paul"}\NormalTok{, }\StringTok{"Alex"}\NormalTok{, }\StringTok{"Tim"}\NormalTok{, }\StringTok{"Bill"}\NormalTok{, }\StringTok{"John"}\NormalTok{)}
+\CommentTok{\# товары}
+\NormalTok{products }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{name  =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"product\_"}\NormalTok{, LETTERS), }
+                   \AttributeTok{price =} \FunctionTok{round}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\AttributeTok{n =} \FunctionTok{length}\NormalTok{(LETTERS), }\DecValTok{100}\NormalTok{, }\DecValTok{400}\NormalTok{), }\DecValTok{0}\NormalTok{))}
+
+\CommentTok{\# функция генерации купленных товаров}
+\NormalTok{prod\_list }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(prod\_list, size\_min, size\_max) \{}
+  
+\NormalTok{  prod }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{product =} \FunctionTok{sample}\NormalTok{(prod\_list, }
+                                  \AttributeTok{size =} \FunctionTok{round}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{, size\_min, size\_max), }\DecValTok{0}\NormalTok{) ,}
+                                  \AttributeTok{replace =}\NormalTok{ F))}
+    \FunctionTok{return}\NormalTok{(prod)}
+\NormalTok{\}}
+
+
+\CommentTok{\# генерируем продажи}
+\NormalTok{sales }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{id         =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{200}\NormalTok{,}
+                \AttributeTok{manager\_id =} \FunctionTok{sample}\NormalTok{(managers, }\AttributeTok{size =} \DecValTok{200}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ T),}
+                \AttributeTok{refund     =} \ConstantTok{FALSE}\NormalTok{,}
+                \AttributeTok{refund\_sum =} \DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# генерируем списки купленных товаров}
+\NormalTok{sale\_proucts }\OtherTok{\textless{}{-}}
+\NormalTok{    sales }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{rowwise}\NormalTok{(id) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{summarise}\NormalTok{(}\FunctionTok{prod\_list}\NormalTok{(products}\SpecialCharTok{$}\NormalTok{name, }\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{left\_join}\NormalTok{(products, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"product"} \OtherTok{=} \StringTok{"name"}\NormalTok{))}
+  
+\CommentTok{\# объединяем продажи с товарами}
+\NormalTok{sales }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(sales, sale\_proucts, }\AttributeTok{by =} \StringTok{"id"}\NormalTok{)}
+
+\CommentTok{\# возвраты}
+\NormalTok{refund }\OtherTok{\textless{}{-}} \FunctionTok{sample\_n}\NormalTok{(sales, }\DecValTok{25}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+          \FunctionTok{mutate}\NormalTok{( }\AttributeTok{refund =} \ConstantTok{TRUE}\NormalTok{,}
+                  \AttributeTok{refund\_sum =}\NormalTok{ price }\SpecialCharTok{*} \FloatTok{0.9}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+          \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{price, }\SpecialCharTok{{-}}\NormalTok{manager\_id) }
+
+\CommentTok{\# отмечаем возвраты в таблице продаж}
+\NormalTok{sales }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rows\_update}\NormalTok{(refund)}
+
+\CommentTok{\# аргумент by}
+\NormalTok{result }\OtherTok{\textless{}{-}}
+\NormalTok{  sales }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{rows\_update}\NormalTok{(refund, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"id"}\NormalTok{, }\StringTok{"product"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux443ux43fux440ux430ux436ux43dux435ux43dux438ux435-1}{%
+\section{Упражнение}\label{ux443ux43fux440ux430ux436ux43dux435ux43dux438ux435-1}}
+
+В этот раз вам необходимо будет рассчитать зарплату 6ти сотрудников.
+
+Для получения тестовых данных выполните приведённый ниже пример кода:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{\# зарплатная ведомость со ставками от бухгалтерии}
+\NormalTok{salary }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{employee\_id =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{,}
+  \AttributeTok{rate        =} \FunctionTok{c}\NormalTok{(}\DecValTok{1000}\NormalTok{, }\DecValTok{1200}\NormalTok{, }\DecValTok{700}\NormalTok{, }\DecValTok{1500}\NormalTok{, }\DecValTok{2000}\NormalTok{),}
+  \AttributeTok{bonus       =} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{),}
+  \AttributeTok{penalty     =} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# бонусы от руководителей отделов}
+\NormalTok{bonus }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{employee\_id =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{),}
+  \AttributeTok{bonus =} \FunctionTok{c}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{500}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# штрафы от руководителей отделов}
+\NormalTok{penalty }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{employee\_id =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{),}
+  \AttributeTok{penalty =} \FunctionTok{c}\NormalTok{(}\DecValTok{150}\NormalTok{, }\DecValTok{320}\NormalTok{, }\DecValTok{80}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# внесение нового сотрудника в ведомость}
+\NormalTok{new }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{employee\_id =} \DecValTok{6}\NormalTok{,}
+  \AttributeTok{rate =} \DecValTok{500}\NormalTok{,}
+  \AttributeTok{bonus =} \DecValTok{0}\NormalTok{,}
+  \AttributeTok{penalty =} \DecValTok{0}
+\NormalTok{)}
+
+\CommentTok{\# корректировки ставки по фактически выработанному времени}
+\NormalTok{time\_rate }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{employee\_id =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{, }
+  \AttributeTok{time\_rate =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+В результате вы сформировали 5 таблиц:
+
+\begin{itemize}
+\tightlist
+\item
+  salary - зарплатная ведомость от бухгалтерии, бухгалтерия знает только данные о ставках сотрудников;
+\item
+  bonus - бонусы, которые выписали руководители отделов сотрудникам;
+\item
+  penalty - штрафы, которые выписали руководители отделов;
+\item
+  new - таблица с 6 сотрудником, он новичёк и бухгалтерия забыла внести его сразу в основную ведомость;
+\item
+  time\_rate - данные о фактически отработанном времени сотрудника з амесяц.
+\end{itemize}
+
+Ваша задача расчитать фактическую запрлату каждого сотрудника по формуле \texttt{total\ =\ rate\ *\ time\_rate\ +\ bonus\ -\ penalty}.
+
+Итоговая таблица при правильном расчёте будет иметь следующий вид:
+
+\begin{verbatim}
+# A tibble: 6 x 6
+  employee_id  rate bonus penalty time_rate total
+        <dbl> <dbl> <dbl>   <dbl>     <dbl> <dbl>
+1           1  1000     0     150       1     850
+2           2  1200     0       0       1    1200
+3           3   700   100       0       1     800
+4           4  1500     0     320       0.8   880
+5           5  2000   500      80       1    2420
+6           6   500     0       0       0.5   250
+\end{verbatim}
+
+\hypertarget{ux440ux435ux448ux435ux43dux438ux44f-ux437ux430ux434ux430ux43dux438ux439}{%
+\chapter*{Решения заданий}\label{ux440ux435ux448ux435ux43dux438ux44f-ux437ux430ux434ux430ux43dux438ux439}}
+\addcontentsline{toc}{chapter}{Решения заданий}
+
+\hypertarget{ux437ux430ux434ux430ux43dux438ux44f-ux43a-ux43fux435ux440ux432ux43eux43cux443-ux443ux440ux43eux43aux443}{%
+\section*{Задания к первому уроку}\label{ux437ux430ux434ux430ux43dux438ux44f-ux43a-ux43fux435ux440ux432ux43eux43cux443-ux443ux440ux43eux43aux443}}
+\addcontentsline{toc}{section}{Задания к первому уроку}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Выберите все столбцы, которые заканчиваются на \texttt{Width}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Attaching package: \textquotesingle{}dplyr\textquotesingle{}}
+\CommentTok{\#\textgreater{} The following objects are masked from \textquotesingle{}package:stats\textquotesingle{}:}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{}     filter, lag}
+\CommentTok{\#\textgreater{} The following objects are masked from \textquotesingle{}package:base\textquotesingle{}:}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{}     intersect, setdiff, setequal, union}
+
+\FunctionTok{select}\NormalTok{(iris, }\FunctionTok{ends\_with}\NormalTok{(}\StringTok{\textquotesingle{}Width\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{tibble}\NormalTok{()}
+\CommentTok{\#\textgreater{} \# A tibble: 150 x 2}
+\CommentTok{\#\textgreater{}    Sepal.Width Petal.Width}
+\CommentTok{\#\textgreater{}          \textless{}dbl\textgreater{}       \textless{}dbl\textgreater{}}
+\CommentTok{\#\textgreater{}  1         3.5         0.2}
+\CommentTok{\#\textgreater{}  2         3           0.2}
+\CommentTok{\#\textgreater{}  3         3.2         0.2}
+\CommentTok{\#\textgreater{}  4         3.1         0.2}
+\CommentTok{\#\textgreater{}  5         3.6         0.2}
+\CommentTok{\#\textgreater{}  6         3.9         0.4}
+\CommentTok{\#\textgreater{}  7         3.4         0.3}
+\CommentTok{\#\textgreater{}  8         3.4         0.2}
+\CommentTok{\#\textgreater{}  9         2.9         0.2}
+\CommentTok{\#\textgreater{} 10         3.1         0.1}
+\CommentTok{\#\textgreater{} \# ... with 140 more rows}
+\CommentTok{\#\textgreater{} \# i Use \textasciigrave{}print(n = ...)\textasciigrave{} to see more rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Переместите с помощью функции \texttt{relocate()} единственный текстовый столбец в левую часть таблицы.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{relocate}\NormalTok{(iris, }\FunctionTok{where}\NormalTok{(is.factor)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{tibble}\NormalTok{()}
+\CommentTok{\#\textgreater{} \# A tibble: 150 x 5}
+\CommentTok{\#\textgreater{}    Species Sepal.Length Sepal.Width Petal.Length Petal.Width}
+\CommentTok{\#\textgreater{}    \textless{}fct\textgreater{}          \textless{}dbl\textgreater{}       \textless{}dbl\textgreater{}        \textless{}dbl\textgreater{}       \textless{}dbl\textgreater{}}
+\CommentTok{\#\textgreater{}  1 setosa           5.1         3.5          1.4         0.2}
+\CommentTok{\#\textgreater{}  2 setosa           4.9         3            1.4         0.2}
+\CommentTok{\#\textgreater{}  3 setosa           4.7         3.2          1.3         0.2}
+\CommentTok{\#\textgreater{}  4 setosa           4.6         3.1          1.5         0.2}
+\CommentTok{\#\textgreater{}  5 setosa           5           3.6          1.4         0.2}
+\CommentTok{\#\textgreater{}  6 setosa           5.4         3.9          1.7         0.4}
+\CommentTok{\#\textgreater{}  7 setosa           4.6         3.4          1.4         0.3}
+\CommentTok{\#\textgreater{}  8 setosa           5           3.4          1.5         0.2}
+\CommentTok{\#\textgreater{}  9 setosa           4.4         2.9          1.4         0.2}
+\CommentTok{\#\textgreater{} 10 setosa           4.9         3.1          1.5         0.1}
+\CommentTok{\#\textgreater{} \# ... with 140 more rows}
+\CommentTok{\#\textgreater{} \# i Use \textasciigrave{}print(n = ...)\textasciigrave{} to see more rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Замените с помощью функции \texttt{rename\_with()} в названии столбцов точку на нижнее подчёркивание, и преобразуйте имена в нижний регистр.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{renamer }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{gsub}\NormalTok{(}\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{\_\textquotesingle{}}\NormalTok{, x) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{tolower}\NormalTok{()}
+\FunctionTok{rename\_with}\NormalTok{(iris, renamer) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{tibble}\NormalTok{()}
+\CommentTok{\#\textgreater{} \# A tibble: 150 x 5}
+\CommentTok{\#\textgreater{}    sepal\_length sepal\_width petal\_length petal\_width species}
+\CommentTok{\#\textgreater{}           \textless{}dbl\textgreater{}       \textless{}dbl\textgreater{}        \textless{}dbl\textgreater{}       \textless{}dbl\textgreater{} \textless{}fct\textgreater{}  }
+\CommentTok{\#\textgreater{}  1          5.1         3.5          1.4         0.2 setosa }
+\CommentTok{\#\textgreater{}  2          4.9         3            1.4         0.2 setosa }
+\CommentTok{\#\textgreater{}  3          4.7         3.2          1.3         0.2 setosa }
+\CommentTok{\#\textgreater{}  4          4.6         3.1          1.5         0.2 setosa }
+\CommentTok{\#\textgreater{}  5          5           3.6          1.4         0.2 setosa }
+\CommentTok{\#\textgreater{}  6          5.4         3.9          1.7         0.4 setosa }
+\CommentTok{\#\textgreater{}  7          4.6         3.4          1.4         0.3 setosa }
+\CommentTok{\#\textgreater{}  8          5           3.4          1.5         0.2 setosa }
+\CommentTok{\#\textgreater{}  9          4.4         2.9          1.4         0.2 setosa }
+\CommentTok{\#\textgreater{} 10          4.9         3.1          1.5         0.1 setosa }
+\CommentTok{\#\textgreater{} \# ... with 140 more rows}
+\CommentTok{\#\textgreater{} \# i Use \textasciigrave{}print(n = ...)\textasciigrave{} to see more rows}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux437ux430ux434ux430ux43dux438ux44f-ux43aux43e-ux432ux442ux43eux440ux43eux43cux443-ux443ux440ux43eux43aux443}{%
+\section*{Задания ко второму уроку}\label{ux437ux430ux434ux430ux43dux438ux44f-ux43aux43e-ux432ux442ux43eux440ux43eux43cux443-ux443ux440ux43eux43aux443}}
+\addcontentsline{toc}{section}{Задания ко второму уроку}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Используйте функцию \texttt{across()}, и разделите значения полей имена которых заканчиваются на \texttt{Length} на среднее значение по этим же столбцам.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\FunctionTok{mutate}\NormalTok{(iris, }\FunctionTok{across}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{\textquotesingle{}Length\textquotesingle{}}\NormalTok{), }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(.))) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{tibble}\NormalTok{()}
+\CommentTok{\#\textgreater{} \# A tibble: 150 x 5}
+\CommentTok{\#\textgreater{}    Sepal.Length Sepal.Width Petal.Length Petal.Width Species}
+\CommentTok{\#\textgreater{}           \textless{}dbl\textgreater{}       \textless{}dbl\textgreater{}        \textless{}dbl\textgreater{}       \textless{}dbl\textgreater{} \textless{}fct\textgreater{}  }
+\CommentTok{\#\textgreater{}  1        0.873         3.5        0.373         0.2 setosa }
+\CommentTok{\#\textgreater{}  2        0.839         3          0.373         0.2 setosa }
+\CommentTok{\#\textgreater{}  3        0.804         3.2        0.346         0.2 setosa }
+\CommentTok{\#\textgreater{}  4        0.787         3.1        0.399         0.2 setosa }
+\CommentTok{\#\textgreater{}  5        0.856         3.6        0.373         0.2 setosa }
+\CommentTok{\#\textgreater{}  6        0.924         3.9        0.452         0.4 setosa }
+\CommentTok{\#\textgreater{}  7        0.787         3.4        0.373         0.3 setosa }
+\CommentTok{\#\textgreater{}  8        0.856         3.4        0.399         0.2 setosa }
+\CommentTok{\#\textgreater{}  9        0.753         2.9        0.373         0.2 setosa }
+\CommentTok{\#\textgreater{} 10        0.839         3.1        0.399         0.1 setosa }
+\CommentTok{\#\textgreater{} \# ... with 140 more rows}
+\CommentTok{\#\textgreater{} \# i Use \textasciigrave{}print(n = ...)\textasciigrave{} to see more rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Посчитайте среднее значение столбцов, имена которых начинаются на \texttt{Sepal} сгруппировав данные по столбцу \texttt{Species}.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{group\_by}\NormalTok{(iris, Species) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}Sepal\textquotesingle{}}\NormalTok{), mean))}
+\CommentTok{\#\textgreater{} \# A tibble: 3 x 3}
+\CommentTok{\#\textgreater{}   Species    Sepal.Length Sepal.Width}
+\CommentTok{\#\textgreater{}   \textless{}fct\textgreater{}             \textless{}dbl\textgreater{}       \textless{}dbl\textgreater{}}
+\CommentTok{\#\textgreater{} 1 setosa             5.01        3.43}
+\CommentTok{\#\textgreater{} 2 versicolor         5.94        2.77}
+\CommentTok{\#\textgreater{} 3 virginica          6.59        2.97}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux437ux430ux434ux430ux43dux438e-ux43a-ux442ux440ux435ux442ux44cux435ux43cux443-ux443ux440ux43eux43aux443}{%
+\section*{Заданиe к третьему уроку}\label{ux437ux430ux434ux430ux43dux438e-ux43a-ux442ux440ux435ux442ux44cux435ux43cux443-ux443ux440ux43eux43aux443}}
+\addcontentsline{toc}{section}{Заданиe к третьему уроку}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ваша задача не переворачивая таблицу, добавить в неё 4 столбца:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  winter\_avg\_sales - средний объём продаж за зимные месяца;
+\item
+  spring\_avg\_sales - средний объём продаж за весенние месяца;
+\item
+  summer\_avg\_sales - средний объём продаж за летние месяца;
+\item
+  autumn\_avg\_sales - средний объём продаж за осенние месяца;
+\end{itemize}
+
+И оставить из исходной таблицы только столбец с обозначением года, и рассчитанные на предыдущем шаге столбцы.
+
+Решение:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\FunctionTok{rowwise}\NormalTok{(sales) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{winter\_avg\_sales =} \FunctionTok{mean}\NormalTok{(Dec, Jan, Feb),}
+    \AttributeTok{spring\_avg\_sales =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(Mar}\SpecialCharTok{:}\NormalTok{May)),}
+    \AttributeTok{summer\_avg\_sales =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(Jun}\SpecialCharTok{:}\NormalTok{Aug)),}
+    \AttributeTok{autumn\_avg\_sales =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{c\_across}\NormalTok{(Sep}\SpecialCharTok{:}\NormalTok{Nov))}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(year, }\FunctionTok{matches}\NormalTok{(}\StringTok{\textquotesingle{}avg\textquotesingle{}}\NormalTok{))}
+\CommentTok{\#\textgreater{} \# A tibble: 6 x 5}
+\CommentTok{\#\textgreater{} \# Rowwise: }
+\CommentTok{\#\textgreater{}    year winter\_avg\_sales spring\_avg\_sales summer\_a\textasciitilde{}1 autum\textasciitilde{}2}
+\CommentTok{\#\textgreater{}   \textless{}int\textgreater{}            \textless{}dbl\textgreater{}            \textless{}dbl\textgreater{}      \textless{}dbl\textgreater{}   \textless{}dbl\textgreater{}}
+\CommentTok{\#\textgreater{} 1  2000              297             215.       243     276 }
+\CommentTok{\#\textgreater{} 2  2001              263             248.       272     225.}
+\CommentTok{\#\textgreater{} 3  2002              187             241.       189     289 }
+\CommentTok{\#\textgreater{} 4  2003              234             309        305.    206.}
+\CommentTok{\#\textgreater{} 5  2004              183             220        301.    290.}
+\CommentTok{\#\textgreater{} 6  2005              273             273        275.    252.}
+\CommentTok{\#\textgreater{} \# ... with abbreviated variable names 1: summer\_avg\_sales,}
+\CommentTok{\#\textgreater{} \#   2: autumn\_avg\_sales}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux437ux430ux434ux430ux43dux438e-ux43a-ux447ux435ux442ux432ux451ux440ux442ux43eux43cux443-ux443ux440ux43eux43aux443}{%
+\section*{Заданиe к четвёртому уроку}\label{ux437ux430ux434ux430ux43dux438e-ux43a-ux447ux435ux442ux432ux451ux440ux442ux43eux43cux443-ux443ux440ux43eux43aux443}}
+\addcontentsline{toc}{section}{Заданиe к четвёртому уроку}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Сгенерируйте согласно этим параметрам таблицу содержащую в столбце \texttt{sim} номер строки таблицы параметров, а в столбце \texttt{val} сами значения случайных распределений. Для воспроизводимости результатов установите счётчик генерации случайных чисел в позиции 400 (\texttt{set.seed(400)}). Тогда итоговый результат будет иметь следующий вид:
+\end{enumerate}
+
+Решение:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{400}\NormalTok{)}
+
+\NormalTok{params }\SpecialCharTok{\%\textgreater{}\%}
+   \FunctionTok{rowwise}\NormalTok{(sim) }\SpecialCharTok{\%\textgreater{}\%}
+   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{val =} \FunctionTok{rnorm}\NormalTok{(n, mean, sd))}
+\CommentTok{\#\textgreater{} \textasciigrave{}summarise()\textasciigrave{} has grouped output by \textquotesingle{}sim\textquotesingle{}. You can override}
+\CommentTok{\#\textgreater{} using the \textasciigrave{}.groups\textasciigrave{} argument.}
+\CommentTok{\#\textgreater{} \# A tibble: 21 x 2}
+\CommentTok{\#\textgreater{} \# Groups:   sim [3]}
+\CommentTok{\#\textgreater{}      sim    val}
+\CommentTok{\#\textgreater{}    \textless{}dbl\textgreater{}  \textless{}dbl\textgreater{}}
+\CommentTok{\#\textgreater{}  1     1  {-}4.18}
+\CommentTok{\#\textgreater{}  2     1   4.08}
+\CommentTok{\#\textgreater{}  3     1   8.36}
+\CommentTok{\#\textgreater{}  4     1  {-}2.41}
+\CommentTok{\#\textgreater{}  5     2  {-}4.02}
+\CommentTok{\#\textgreater{}  6     2 {-}11.5 }
+\CommentTok{\#\textgreater{}  7     2  10.6 }
+\CommentTok{\#\textgreater{}  8     2   9.20}
+\CommentTok{\#\textgreater{}  9     2   3.08}
+\CommentTok{\#\textgreater{} 10     2  {-}3.75}
+\CommentTok{\#\textgreater{} \# ... with 11 more rows}
+\CommentTok{\#\textgreater{} \# i Use \textasciigrave{}print(n = ...)\textasciigrave{} to see more rows}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux437ux430ux434ux430ux43dux438e-ux43a-ux43fux44fux442ux43eux43cux443-ux443ux440ux43eux43aux443}{%
+\section*{Заданиe к пятому уроку}\label{ux437ux430ux434ux430ux43dux438e-ux43a-ux43fux44fux442ux43eux43cux443-ux443ux440ux43eux43aux443}}
+\addcontentsline{toc}{section}{Заданиe к пятому уроку}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Ваша задача расчитать фактическую запрлату каждого сотрудника по формуле \texttt{total\ =\ rate\ *\ time\_rate\ +\ bonus\ -\ penalty}.
+\end{enumerate}
+
+Решение:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\FunctionTok{rows\_update}\NormalTok{(salary, bonus, }\AttributeTok{by =} \StringTok{\textquotesingle{}employee\_id\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rows\_update}\NormalTok{(penalty, }\AttributeTok{by =} \StringTok{\textquotesingle{}employee\_id\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{rows\_insert}\NormalTok{(new, }\AttributeTok{by =} \StringTok{\textquotesingle{}employee\_id\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(time\_rate, }\AttributeTok{by =} \StringTok{\textquotesingle{}employee\_id\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{total =}\NormalTok{ rate }\SpecialCharTok{*}\NormalTok{ time\_rate }\SpecialCharTok{+}\NormalTok{ bonus }\SpecialCharTok{{-}}\NormalTok{ penalty)}
+\CommentTok{\#\textgreater{} \# A tibble: 6 x 6}
+\CommentTok{\#\textgreater{}   employee\_id  rate bonus penalty time\_rate total}
+\CommentTok{\#\textgreater{}         \textless{}int\textgreater{} \textless{}dbl\textgreater{} \textless{}dbl\textgreater{}   \textless{}dbl\textgreater{}     \textless{}dbl\textgreater{} \textless{}dbl\textgreater{}}
+\CommentTok{\#\textgreater{} 1           1  1000     0     150       1     850}
+\CommentTok{\#\textgreater{} 2           2  1200     0       0       1    1200}
+\CommentTok{\#\textgreater{} 3           3   700   100       0       1     800}
+\CommentTok{\#\textgreater{} 4           4  1500     0     320       0.8   880}
+\CommentTok{\#\textgreater{} 5           5  2000   500      80       1    2420}
+\CommentTok{\#\textgreater{} 6           6   500     0       0       0.5   250}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux437ux430ux43aux43bux44eux447ux435ux43dux438ux435}{%
+\chapter*{Заключение}\label{ux437ux430ux43aux43bux44eux447ux435ux43dux438ux435}}
+\addcontentsline{toc}{chapter}{Заключение}
+
+Надеюсь данный мини курс по введению в \texttt{dplyr\ 1.0.0} был вам полезен, рассмотренный в нём релиз содержал действительно много полезных доработок и новых функций.
+
+Буду рад видеть вас среди подписчиков моего \href{https://t.me/R4marketing}{Telegram} и \href{https://www.youtube.com/R4marketing/?sub_confirmation=1}{YouTube} канала.
+
+\emph{Алексей Селезнёв}
+
+\end{document}

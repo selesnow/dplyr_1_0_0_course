@@ -1,4 +1,4 @@
-book_filename: "dplyr_1.0.0"
+book_filename: "dplyr_1_0_0"
 new_session: true
 before_chapter_script: _common.R
 delete_merged_file: true
