@@ -17,7 +17,7 @@ library(dplyr)
 
 select(iris, ends_with('Width')) %>% 
   tibble()
-#> # A tibble: 150 × 2
+#> # A tibble: 150 x 2
 #>    Sepal.Width Petal.Width
 #>          <dbl>       <dbl>
 #>  1         3.5         0.2
@@ -30,8 +30,8 @@ select(iris, ends_with('Width')) %>%
 #>  8         3.4         0.2
 #>  9         2.9         0.2
 #> 10         3.1         0.1
-#> # … with 140 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
+#> # ... with 140 more rows
+#> # i Use `print(n = ...)` to see more rows
 ```
 
 2. Переместите с помощью функции `relocate()` единственный текстовый столбец в левую часть таблицы.
@@ -39,7 +39,7 @@ select(iris, ends_with('Width')) %>%
 ```r
 relocate(iris, where(is.factor)) %>% 
   tibble()
-#> # A tibble: 150 × 5
+#> # A tibble: 150 x 5
 #>    Species Sepal.Length Sepal.Width Petal.Length Petal.Width
 #>    <fct>          <dbl>       <dbl>        <dbl>       <dbl>
 #>  1 setosa           5.1         3.5          1.4         0.2
@@ -52,8 +52,8 @@ relocate(iris, where(is.factor)) %>%
 #>  8 setosa           5           3.4          1.5         0.2
 #>  9 setosa           4.4         2.9          1.4         0.2
 #> 10 setosa           4.9         3.1          1.5         0.1
-#> # … with 140 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
+#> # ... with 140 more rows
+#> # i Use `print(n = ...)` to see more rows
 ```
 
 3. Замените с помощью функции `rename_with()` в названии столбцов точку на нижнее подчёркивание, и преобразуйте имена в нижний регистр.
@@ -62,7 +62,7 @@ relocate(iris, where(is.factor)) %>%
 renamer <- function(x) gsub('\\.', '\\_', x) %>% tolower()
 rename_with(iris, renamer) %>% 
   tibble()
-#> # A tibble: 150 × 5
+#> # A tibble: 150 x 5
 #>    sepal_length sepal_width petal_length petal_width species
 #>           <dbl>       <dbl>        <dbl>       <dbl> <fct>  
 #>  1          5.1         3.5          1.4         0.2 setosa 
@@ -75,8 +75,8 @@ rename_with(iris, renamer) %>%
 #>  8          5           3.4          1.5         0.2 setosa 
 #>  9          4.4         2.9          1.4         0.2 setosa 
 #> 10          4.9         3.1          1.5         0.1 setosa 
-#> # … with 140 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
+#> # ... with 140 more rows
+#> # i Use `print(n = ...)` to see more rows
 ```
 
 ## Задания ко второму уроку {-}
@@ -88,7 +88,7 @@ library(dplyr)
 
 mutate(iris, across(ends_with('Length'), ~ . / mean(.))) %>% 
   tibble()
-#> # A tibble: 150 × 5
+#> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #>           <dbl>       <dbl>        <dbl>       <dbl> <fct>  
 #>  1        0.873         3.5        0.373         0.2 setosa 
@@ -101,8 +101,8 @@ mutate(iris, across(ends_with('Length'), ~ . / mean(.))) %>%
 #>  8        0.856         3.4        0.399         0.2 setosa 
 #>  9        0.753         2.9        0.373         0.2 setosa 
 #> 10        0.839         3.1        0.399         0.1 setosa 
-#> # … with 140 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
+#> # ... with 140 more rows
+#> # i Use `print(n = ...)` to see more rows
 ```
 
 2. Посчитайте среднее значение столбцов, имена которых начинаются на `Sepal` сгруппировав данные по столбцу `Species`.
@@ -110,7 +110,7 @@ mutate(iris, across(ends_with('Length'), ~ . / mean(.))) %>%
 ```r
 group_by(iris, Species) %>% 
   summarise(across(starts_with('Sepal'), mean))
-#> # A tibble: 3 × 3
+#> # A tibble: 3 x 3
 #>   Species    Sepal.Length Sepal.Width
 #>   <fct>             <dbl>       <dbl>
 #> 1 setosa             5.01        3.43
@@ -144,9 +144,9 @@ rowwise(sales) %>%
     autumn_avg_sales = mean(c_across(Sep:Nov))
   ) %>% 
   select(year, matches('avg'))
-#> # A tibble: 6 × 5
+#> # A tibble: 6 x 5
 #> # Rowwise: 
-#>    year winter_avg_sales spring_avg_sales summer_a…¹ autum…²
+#>    year winter_avg_sales spring_avg_sales summer_a~1 autum~2
 #>   <int>            <dbl>            <dbl>      <dbl>   <dbl>
 #> 1  2000              297             215.       243     276 
 #> 2  2001              263             248.       272     225.
@@ -154,8 +154,8 @@ rowwise(sales) %>%
 #> 4  2003              234             309        305.    206.
 #> 5  2004              183             220        301.    290.
 #> 6  2005              273             273        275.    252.
-#> # … with abbreviated variable names ¹​summer_avg_sales,
-#> #   ²​autumn_avg_sales
+#> # ... with abbreviated variable names 1: summer_avg_sales,
+#> #   2: autumn_avg_sales
 ```
 
 ## Заданиe к четвёртому уроку {-}
@@ -175,7 +175,7 @@ params %>%
    summarise(val = rnorm(n, mean, sd))
 #> `summarise()` has grouped output by 'sim'. You can override
 #> using the `.groups` argument.
-#> # A tibble: 21 × 2
+#> # A tibble: 21 x 2
 #> # Groups:   sim [3]
 #>      sim    val
 #>    <dbl>  <dbl>
@@ -189,8 +189,8 @@ params %>%
 #>  8     2   9.20
 #>  9     2   3.08
 #> 10     2  -3.75
-#> # … with 11 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
+#> # ... with 11 more rows
+#> # i Use `print(n = ...)` to see more rows
 ```
 
 ## Заданиe к пятому уроку {-}
@@ -209,7 +209,7 @@ rows_update(salary, bonus, by = 'employee_id') %>%
   rows_insert(new, by = 'employee_id') %>% 
   left_join(time_rate, by = 'employee_id') %>% 
   mutate(total = rate * time_rate + bonus - penalty)
-#> # A tibble: 6 × 6
+#> # A tibble: 6 x 6
 #>   employee_id  rate bonus penalty time_rate total
 #>         <int> <dbl> <dbl>   <dbl>     <dbl> <dbl>
 #> 1           1  1000     0     150       1     850

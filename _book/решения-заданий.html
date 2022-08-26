@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Решения заданий | Введение в dplyr 1.0.0</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="Задания к первому уроку Выберите все столбцы, которые заканчиваются на Width. library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="Решения заданий | Введение в dplyr 1.0.0">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/selesnow/dplyr_1_0_0_course/решения-заданий.html">
+<meta property="og:image" content="https://github.com/selesnow/dplyr_1_0_0_course/img/cover.png">
+<meta property="og:description" content="Задания к первому уроку Выберите все столбцы, которые заканчиваются на Width. library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Решения заданий | Введение в dplyr 1.0.0">
+<meta name="twitter:description" content="Задания к первому уроку Выберите все столбцы, которые заканчиваются на Width. library(dplyr) #&gt; #&gt; Attaching package: 'dplyr' #&gt; The following objects are masked from 'package:stats': #&gt; #&gt;  ...">
+<meta name="twitter:image" content="https://github.com/selesnow/dplyr_1_0_0_course/img/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><link rel="shortcut icon" href="img/favicon.ico">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Введение в dplyr 1.0.0</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-select-rename_with-%D0%B8-relocate.html"><span class="header-section-number">1</span> Функции select(), rename_with() и relocate()</a></li>
+<li><a class="" href="%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-across.html"><span class="header-section-number">2</span> Функция across()</a></li>
+<li><a class="" href="%D0%BF%D0%B5%D1%80%D0%B5%D0%B1%D0%BE%D1%80-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B5%D0%B9-rowwise.html"><span class="header-section-number">3</span> Перебор строк функцией rowwise()</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-summarise.html"><span class="header-section-number">4</span> Обновлённая функция summarise()</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D0%B4%D0%B0%D1%82%D0%B0-%D1%84%D1%80%D0%B5%D0%B9%D0%BC%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-rows_.html"><span class="header-section-number">5</span> Добавление, изменение и удаление строк дата фрейма через rows_*()</a></li>
+<li><a class="active" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решения заданий</a></li>
+<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5.html">Заключение</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/selesnow/dplyr_1_0_0_course">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="решения-заданий" class="section level1 unnumbered">
+<h1>Решения заданий<a class="anchor" aria-label="anchor" href="#%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9"><i class="fas fa-link"></i></a>
+</h1>
+<div id="задания-к-первому-уроку" class="section level2 unnumbered">
+<h2>Задания к первому уроку<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BA-%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Выберите все столбцы, которые заканчиваются на <code>Width</code>.</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">'Width'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 150 × 2</span></span>
+<span><span class="co">#&gt;    Sepal.Width Petal.Width</span></span>
+<span><span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1         3.5         0.2</span></span>
+<span><span class="co">#&gt;  2         3           0.2</span></span>
+<span><span class="co">#&gt;  3         3.2         0.2</span></span>
+<span><span class="co">#&gt;  4         3.1         0.2</span></span>
+<span><span class="co">#&gt;  5         3.6         0.2</span></span>
+<span><span class="co">#&gt;  6         3.9         0.4</span></span>
+<span><span class="co">#&gt;  7         3.4         0.3</span></span>
+<span><span class="co">#&gt;  8         3.4         0.2</span></span>
+<span><span class="co">#&gt;  9         2.9         0.2</span></span>
+<span><span class="co">#&gt; 10         3.1         0.1</span></span>
+<span><span class="co">#&gt; # … with 140 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Переместите с помощью функции <code><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate()</a></code> единственный текстовый столбец в левую часть таблицы.</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu">where</span><span class="op">(</span><span class="va">is.factor</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 150 × 5</span></span>
+<span><span class="co">#&gt;    Species Sepal.Length Sepal.Width Petal.Length Petal.Width</span></span>
+<span><span class="co">#&gt;    &lt;fct&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 setosa           5.1         3.5          1.4         0.2</span></span>
+<span><span class="co">#&gt;  2 setosa           4.9         3            1.4         0.2</span></span>
+<span><span class="co">#&gt;  3 setosa           4.7         3.2          1.3         0.2</span></span>
+<span><span class="co">#&gt;  4 setosa           4.6         3.1          1.5         0.2</span></span>
+<span><span class="co">#&gt;  5 setosa           5           3.6          1.4         0.2</span></span>
+<span><span class="co">#&gt;  6 setosa           5.4         3.9          1.7         0.4</span></span>
+<span><span class="co">#&gt;  7 setosa           4.6         3.4          1.4         0.3</span></span>
+<span><span class="co">#&gt;  8 setosa           5           3.4          1.5         0.2</span></span>
+<span><span class="co">#&gt;  9 setosa           4.4         2.9          1.4         0.2</span></span>
+<span><span class="co">#&gt; 10 setosa           4.9         3.1          1.5         0.1</span></span>
+<span><span class="co">#&gt; # … with 140 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Замените с помощью функции <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with()</a></code> в названии столбцов точку на нижнее подчёркивание, и преобразуйте имена в нижний регистр.</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">renamer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">'\\.'</span>, <span class="st">'\\_'</span>, <span class="va">x</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename_with</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">renamer</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 150 × 5</span></span>
+<span><span class="co">#&gt;    sepal_length sepal_width petal_length petal_width species</span></span>
+<span><span class="co">#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt;  1          5.1         3.5          1.4         0.2 setosa </span></span>
+<span><span class="co">#&gt;  2          4.9         3            1.4         0.2 setosa </span></span>
+<span><span class="co">#&gt;  3          4.7         3.2          1.3         0.2 setosa </span></span>
+<span><span class="co">#&gt;  4          4.6         3.1          1.5         0.2 setosa </span></span>
+<span><span class="co">#&gt;  5          5           3.6          1.4         0.2 setosa </span></span>
+<span><span class="co">#&gt;  6          5.4         3.9          1.7         0.4 setosa </span></span>
+<span><span class="co">#&gt;  7          4.6         3.4          1.4         0.3 setosa </span></span>
+<span><span class="co">#&gt;  8          5           3.4          1.5         0.2 setosa </span></span>
+<span><span class="co">#&gt;  9          4.4         2.9          1.4         0.2 setosa </span></span>
+<span><span class="co">#&gt; 10          4.9         3.1          1.5         0.1 setosa </span></span>
+<span><span class="co">#&gt; # … with 140 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+</div>
+<div id="задания-ко-второму-уроку" class="section level2 unnumbered">
+<h2>Задания ко второму уроку<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BA%D0%BE-%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Используйте функцию <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>, и разделите значения полей имена которых заканчиваются на <code>Length</code> на среднее значение по этим же столбцам.</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">'Length'</span><span class="op">)</span>, <span class="op">~</span> <span class="va">.</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 150 × 5</span></span>
+<span><span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></span>
+<span><span class="co">#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt;  1        0.873         3.5        0.373         0.2 setosa </span></span>
+<span><span class="co">#&gt;  2        0.839         3          0.373         0.2 setosa </span></span>
+<span><span class="co">#&gt;  3        0.804         3.2        0.346         0.2 setosa </span></span>
+<span><span class="co">#&gt;  4        0.787         3.1        0.399         0.2 setosa </span></span>
+<span><span class="co">#&gt;  5        0.856         3.6        0.373         0.2 setosa </span></span>
+<span><span class="co">#&gt;  6        0.924         3.9        0.452         0.4 setosa </span></span>
+<span><span class="co">#&gt;  7        0.787         3.4        0.373         0.3 setosa </span></span>
+<span><span class="co">#&gt;  8        0.856         3.4        0.399         0.2 setosa </span></span>
+<span><span class="co">#&gt;  9        0.753         2.9        0.373         0.2 setosa </span></span>
+<span><span class="co">#&gt; 10        0.839         3.1        0.399         0.1 setosa </span></span>
+<span><span class="co">#&gt; # … with 140 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Посчитайте среднее значение столбцов, имена которых начинаются на <code>Sepal</code> сгруппировав данные по столбцу <code>Species</code>.</li>
+</ol>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'Sepal'</span><span class="op">)</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt;   Species    Sepal.Length Sepal.Width</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt;             &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 setosa             5.01        3.43</span></span>
+<span><span class="co">#&gt; 2 versicolor         5.94        2.77</span></span>
+<span><span class="co">#&gt; 3 virginica          6.59        2.97</span></span></code></pre></div>
+</div>
+<div id="заданиe-к-третьему-уроку" class="section level2 unnumbered">
+<h2>Заданиe к третьему уроку<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8e-%D0%BA-%D1%82%D1%80%D0%B5%D1%82%D1%8C%D0%B5%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Ваша задача не переворачивая таблицу, добавить в неё 4 столбца:</li>
+</ol>
+<ul>
+<li>winter_avg_sales - средний объём продаж за зимные месяца;</li>
+<li>spring_avg_sales - средний объём продаж за весенние месяца;</li>
+<li>summer_avg_sales - средний объём продаж за летние месяца;</li>
+<li>autumn_avg_sales - средний объём продаж за осенние месяца;</li>
+</ul>
+<p>И оставить из исходной таблицы только столбец с обозначением года, и рассчитанные на предыдущем шаге столбцы.</p>
+<p>Решение:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="va">sales</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    winter_avg_sales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Dec</span>, <span class="va">Jan</span>, <span class="va">Feb</span><span class="op">)</span>,</span>
+<span>    spring_avg_sales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">Mar</span><span class="op">:</span><span class="va">May</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    summer_avg_sales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">Jun</span><span class="op">:</span><span class="va">Aug</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    autumn_avg_sales <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="va">Sep</span><span class="op">:</span><span class="va">Nov</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">'avg'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
+<span><span class="co">#&gt; # Rowwise: </span></span>
+<span><span class="co">#&gt;    year winter_avg_sales spring_avg_sales summer_a…¹ autum…²</span></span>
+<span><span class="co">#&gt;   &lt;int&gt;            &lt;dbl&gt;            &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1  2000              297             215.       243     276 </span></span>
+<span><span class="co">#&gt; 2  2001              263             248.       272     225.</span></span>
+<span><span class="co">#&gt; 3  2002              187             241.       189     289 </span></span>
+<span><span class="co">#&gt; 4  2003              234             309        305.    206.</span></span>
+<span><span class="co">#&gt; 5  2004              183             220        301.    290.</span></span>
+<span><span class="co">#&gt; 6  2005              273             273        275.    252.</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable names ¹​summer_avg_sales,</span></span>
+<span><span class="co">#&gt; #   ²​autumn_avg_sales</span></span></code></pre></div>
+</div>
+<div id="заданиe-к-четвёртому-уроку" class="section level2 unnumbered">
+<h2>Заданиe к четвёртому уроку<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8e-%D0%BA-%D1%87%D0%B5%D1%82%D0%B2%D1%91%D1%80%D1%82%D0%BE%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Сгенерируйте согласно этим параметрам таблицу содержащую в столбце <code>sim</code> номер строки таблицы параметров, а в столбце <code>val</code> сами значения случайных распределений. Для воспроизводимости результатов установите счётчик генерации случайных чисел в позиции 400 (<code>set.seed(400)</code>). Тогда итоговый результат будет иметь следующий вид:</li>
+</ol>
+<p>Решение:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">400</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">params</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="va">sim</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>val <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">mean</span>, <span class="va">sd</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `summarise()` has grouped output by 'sim'. You can override</span></span>
+<span><span class="co">#&gt; using the `.groups` argument.</span></span>
+<span><span class="co">#&gt; # A tibble: 21 × 2</span></span>
+<span><span class="co">#&gt; # Groups:   sim [3]</span></span>
+<span><span class="co">#&gt;      sim    val</span></span>
+<span><span class="co">#&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1     1  -4.18</span></span>
+<span><span class="co">#&gt;  2     1   4.08</span></span>
+<span><span class="co">#&gt;  3     1   8.36</span></span>
+<span><span class="co">#&gt;  4     1  -2.41</span></span>
+<span><span class="co">#&gt;  5     2  -4.02</span></span>
+<span><span class="co">#&gt;  6     2 -11.5 </span></span>
+<span><span class="co">#&gt;  7     2  10.6 </span></span>
+<span><span class="co">#&gt;  8     2   9.20</span></span>
+<span><span class="co">#&gt;  9     2   3.08</span></span>
+<span><span class="co">#&gt; 10     2  -3.75</span></span>
+<span><span class="co">#&gt; # … with 11 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+</div>
+<div id="заданиe-к-пятому-уроку" class="section level2 unnumbered">
+<h2>Заданиe к пятому уроку<a class="anchor" aria-label="anchor" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8e-%D0%BA-%D0%BF%D1%8F%D1%82%D0%BE%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Ваша задача расчитать фактическую запрлату каждого сотрудника по формуле <code>total = rate * time_rate + bonus - penalty</code>.</li>
+</ol>
+<p>Решение:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rows.html">rows_update</a></span><span class="op">(</span><span class="va">salary</span>, <span class="va">bonus</span>, by <span class="op">=</span> <span class="st">'employee_id'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rows.html">rows_update</a></span><span class="op">(</span><span class="va">penalty</span>, by <span class="op">=</span> <span class="st">'employee_id'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rows.html">rows_insert</a></span><span class="op">(</span><span class="va">new</span>, by <span class="op">=</span> <span class="st">'employee_id'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">time_rate</span>, by <span class="op">=</span> <span class="st">'employee_id'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>total <span class="op">=</span> <span class="va">rate</span> <span class="op">*</span> <span class="va">time_rate</span> <span class="op">+</span> <span class="va">bonus</span> <span class="op">-</span> <span class="va">penalty</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 6</span></span>
+<span><span class="co">#&gt;   employee_id  rate bonus penalty time_rate total</span></span>
+<span><span class="co">#&gt;         &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1           1  1000     0     150       1     850</span></span>
+<span><span class="co">#&gt; 2           2  1200     0       0       1    1200</span></span>
+<span><span class="co">#&gt; 3           3   700   100       0       1     800</span></span>
+<span><span class="co">#&gt; 4           4  1500     0     320       0.8   880</span></span>
+<span><span class="co">#&gt; 5           5  2000   500      80       1    2420</span></span>
+<span><span class="co">#&gt; 6           6   500     0       0       0.5   250</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D0%B4%D0%B0%D1%82%D0%B0-%D1%84%D1%80%D0%B5%D0%B9%D0%BC%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-rows_.html"><span class="header-section-number">5</span> Добавление, изменение и удаление строк дата фрейма через rows_*()</a></div>
+<div class="next"><a href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5.html">Заключение</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9">Решения заданий</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BA-%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83">Задания к первому уроку</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%BA%D0%BE-%D0%B2%D1%82%D0%BE%D1%80%D0%BE%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83">Задания ко второму уроку</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8e-%D0%BA-%D1%82%D1%80%D0%B5%D1%82%D1%8C%D0%B5%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83">Заданиe к третьему уроку</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8e-%D0%BA-%D1%87%D0%B5%D1%82%D0%B2%D1%91%D1%80%D1%82%D0%BE%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83">Заданиe к четвёртому уроку</a></li>
+<li><a class="nav-link" href="#%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8e-%D0%BA-%D0%BF%D1%8F%D1%82%D0%BE%D0%BC%D1%83-%D1%83%D1%80%D0%BE%D0%BA%D1%83">Заданиe к пятому уроку</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/selesnow/dplyr_1_0_0_course/blob/master/6-solutions.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/dplyr_1_0_0_course/edit/master/6-solutions.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

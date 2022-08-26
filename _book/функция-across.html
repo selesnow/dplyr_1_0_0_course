@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Урок 2 Функция across() | Введение в dplyr 1.0.0</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="2.1 Описание В этом уроке продемонстрирована работа с новой функцией across(), которая упрощает обращение к столбцам внутри таких функций как mutate() и summarise(). По сути функция across()...">
+<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta property="og:title" content="Урок 2 Функция across() | Введение в dplyr 1.0.0">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/selesnow/dplyr_1_0_0_course/функция-across.html">
+<meta property="og:image" content="https://github.com/selesnow/dplyr_1_0_0_course/img/cover.png">
+<meta property="og:description" content="2.1 Описание В этом уроке продемонстрирована работа с новой функцией across(), которая упрощает обращение к столбцам внутри таких функций как mutate() и summarise(). По сути функция across()...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Урок 2 Функция across() | Введение в dplyr 1.0.0">
+<meta name="twitter:description" content="2.1 Описание В этом уроке продемонстрирована работа с новой функцией across(), которая упрощает обращение к столбцам внутри таких функций как mutate() и summarise(). По сути функция across()...">
+<meta name="twitter:image" content="https://github.com/selesnow/dplyr_1_0_0_course/img/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><link rel="shortcut icon" href="img/favicon.ico">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Введение в dplyr 1.0.0</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-select-rename_with-%D0%B8-relocate.html"><span class="header-section-number">1</span> Функции select(), rename_with() и relocate()</a></li>
+<li><a class="active" href="%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-across.html"><span class="header-section-number">2</span> Функция across()</a></li>
+<li><a class="" href="%D0%BF%D0%B5%D1%80%D0%B5%D0%B1%D0%BE%D1%80-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B5%D0%B9-rowwise.html"><span class="header-section-number">3</span> Перебор строк функцией rowwise()</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-summarise.html"><span class="header-section-number">4</span> Обновлённая функция summarise()</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D0%B4%D0%B0%D1%82%D0%B0-%D1%84%D1%80%D0%B5%D0%B9%D0%BC%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-rows_.html"><span class="header-section-number">5</span> Добавление, изменение и удаление строк дата фрейма через rows_*()</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решения заданий</a></li>
+<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5.html">Заключение</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/selesnow/dplyr_1_0_0_course">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="функция-across" class="section level1" number="2">
+<h1>
+<span class="header-section-number">Урок 2</span> Функция across()<a class="anchor" aria-label="anchor" href="#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-across"><i class="fas fa-link"></i></a>
+</h1>
+<div id="описание-1" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Описание<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>В этом уроке продемонстрирована работа с новой функцией <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>, которая упрощает обращение к столбцам внутри таких функций как <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> и <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>. По сути функция <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code> заменяет функции с приставками <code>*_at()</code> , <code>*_if()</code>, <code>*_all()</code>.</p>
+<p>Обзор основан на статье Хедли Викхема <a href="https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/">“dplyr 1.0.0: working across columns”</a>.</p>
+</div>
+<div id="видео-1" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-1"><i class="fas fa-link"></i></a>
+</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J5tZpx_JxWk?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+</div>
+<div id="код-1" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Код<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># devtools::install_github("tidyverse/dplyr")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># тестовый дата фрейм</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>g1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,size <span class="op">=</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">T</span> <span class="op">)</span><span class="op">)</span>,</span>
+<span>             g2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,size <span class="op">=</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">T</span> <span class="op">)</span><span class="op">)</span>,</span>
+<span>             a  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>             b  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span>,</span>
+<span>             c  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>             d  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># о чём пойдёт речь</span></span>
+<span><span class="co">## копирование кода, когда требуется </span></span>
+<span><span class="co">## произвести одну и туже операцию с разными функциями</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># новый способ</span></span>
+<span><span class="co">## теперь для таких преобразований можно</span></span>
+<span><span class="co">## использовать тот же синтаксис что и в select()</span></span>
+<span><span class="co">### посчитать среднее по столбцам от a до d</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">a</span><span class="op">:</span><span class="va">d</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### или посчитать среднее выбрав все числовые столбцы </span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ##############################</span></span>
+<span><span class="co"># Простой пример</span></span>
+<span><span class="co"># аргументы функции accros</span></span>
+<span></span>
+<span><span class="co">## .cols - выбор столбцов по позиции, имени, функцией, типу данных, или комбинируя любые перечисленные способы</span></span>
+<span><span class="co">## .fns - функция, или список функций которые необходимо применить к каждому столбцу</span></span>
+<span></span>
+<span><span class="co">## считаем количество униклаьных значений в текстовых полях</span></span>
+<span><span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.character</span>, <span class="va">n_distinct</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## пример с фильтрацией данных</span></span>
+<span><span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">gender</span>, <span class="va">homeworld</span><span class="op">)</span>, <span class="va">n_distinct</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## комбинируем accross с другими вычислениями</span></span>
+<span><span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">homeworld</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, </span>
+<span>            n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ##############################</span></span>
+<span><span class="co"># Чем accross лучше предыдущих функций с суфиксами _at, _if, _all</span></span>
+<span></span>
+<span><span class="co">## 1. accross позволяет комбинировать различные вычисления внутри одной summarise </span></span>
+<span><span class="co">## пример из статьи</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">mean</span><span class="op">)</span>, </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.factor</span>, <span class="va">nlevels</span><span class="op">)</span>,</span>
+<span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co">## рабочий пример</span></span>
+<span><span class="va">starwars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.character</span>, <span class="va">n_distinct</span><span class="op">)</span>, </span>
+<span>            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">mean</span><span class="op">)</span>, </span>
+<span>            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.list</span>, <span class="va">length</span><span class="op">)</span>, </span>
+<span>            n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co">## 2. уменьшает количество необходимых функций в dplyr, что облегчает их запоминание</span></span>
+<span><span class="co">## 3. объединяет возможности функций с суфиксами if_, at_, и даёт возможность объединять их возможности</span></span>
+<span><span class="co">## 4. accross не требует от вас использования функции vars для указания нужных столбцлв, как это было раньше</span></span>
+<span></span>
+<span><span class="co"># ##############################</span></span>
+<span><span class="co"># перевод старого кода на accross</span></span>
+<span></span>
+<span><span class="co">## для перевода функций с суфиксами _at, _if, _all используйте следующие правила</span></span>
+<span><span class="co">### в accross первым агрументом будет:</span></span>
+<span><span class="co">### Для *_if() старый второй аргумент.</span></span>
+<span><span class="co">### Для *_at() старый второй аргумент с удаленным вызовом vars().</span></span>
+<span><span class="co">### Для *_all(), в качестве первого аргумента передайте функцию everything()</span></span>
+<span></span>
+<span><span class="co">## примеры</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>y_a  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>             y_b  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span>,</span>
+<span>             x    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">15</span>, <span class="fl">30</span><span class="op">)</span>,</span>
+<span>             d    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### из _if в accross</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_if</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># -&gt;</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">is.numeric</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### из _at в accross</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># -&gt;</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### из _all в accroos</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_all</a></span><span class="op">(</span><span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># -&gt;</span></span>
+<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">mean</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="упраженения" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Упраженения<a class="anchor" aria-label="anchor" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F"><i class="fas fa-link"></i></a>
+</h2>
+<p>Как и в предыдущем уроке выполнять упражнения необходимо на таблице <code>iris</code>.</p>
+<ol style="list-style-type: decimal">
+<li>Используйте функцию <code><a href="https://dplyr.tidyverse.org/reference/across.html">across()</a></code>, и разделите значения полей имена которых заканчиваются на <code>Length</code> на среднее значение по этим же столбцам.</li>
+<li>Посчитайте среднее значение столбцов, имена которых начинаются на <code>Sepal</code> сгруппировав данные по столбцу <code>Species</code>.</li>
+</ol>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-select-rename_with-%D0%B8-relocate.html"><span class="header-section-number">1</span> Функции select(), rename_with() и relocate()</a></div>
+<div class="next"><a href="%D0%BF%D0%B5%D1%80%D0%B5%D0%B1%D0%BE%D1%80-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B5%D0%B9-rowwise.html"><span class="header-section-number">3</span> Перебор строк функцией rowwise()</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-across"><span class="header-section-number">2</span> Функция across()</a></li>
+<li><a class="nav-link" href="#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-1"><span class="header-section-number">2.1</span> Описание</a></li>
+<li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-1"><span class="header-section-number">2.2</span> Видео</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%BE%D0%B4-1"><span class="header-section-number">2.3</span> Код</a></li>
+<li><a class="nav-link" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F"><span class="header-section-number">2.4</span> Упраженения</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/selesnow/dplyr_1_0_0_course/blob/master/2-across.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/dplyr_1_0_0_course/edit/master/2-across.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

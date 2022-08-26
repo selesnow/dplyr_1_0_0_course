@@ -6,7 +6,7 @@
 Обзор основан на статье Хедли Викхема ["dplyr 1.0.0: working across columns"](https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/).
 
 ## Видео
-<iframe width="560" height="315" src="https://www.youtube.com/embed/J5tZpx_JxWk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J5tZpx_JxWk?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Код
 ```{r, eval=FALSE}

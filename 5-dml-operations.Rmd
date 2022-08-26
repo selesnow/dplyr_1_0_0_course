@@ -15,7 +15,7 @@
 В основе урока лежит статья ["dplyr 1.0.0: last minute additions"](https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/).
 
 ## Видео
-<iframe width="560" height="315" src="https://www.youtube.com/embed/A2nDQqH9Kr0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/A2nDQqH9Kr0?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Код
 ```{r eval=FALSE}

@@ -6,7 +6,7 @@
 Урок основан на статье ["dplyr 1.0.0: new summarise() features"](https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-summarise/).
 
 ## Видео
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4RNBDDui6Yw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4RNBDDui6Yw?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Код
 ```{r eval=FALSE}
