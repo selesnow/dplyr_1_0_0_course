@@ -7,7 +7,7 @@
 <title>Введение | Введение в dplyr 1.0.0</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="Серия видео уроков посвящённая обновлению dplyr 1.0.0..">
-<meta name="generator" content="bookdown 0.28 with bs4_book()">
+<meta name="generator" content="bookdown 0.27 with bs4_book()">
 <meta property="og:title" content="Введение | Введение в dplyr 1.0.0">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/selesnow/dplyr_1_0_0_course">
@@ -59,6 +59,7 @@
 <li><a class="" href="%D0%BF%D0%B5%D1%80%D0%B5%D0%B1%D0%BE%D1%80-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B5%D0%B9-rowwise.html"><span class="header-section-number">3</span> Перебор строк функцией rowwise()</a></li>
 <li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-summarise.html"><span class="header-section-number">4</span> Обновлённая функция summarise()</a></li>
 <li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D0%B4%D0%B0%D1%82%D0%B0-%D1%84%D1%80%D0%B5%D0%B9%D0%BC%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-rows_.html"><span class="header-section-number">5</span> Добавление, изменение и удаление строк дата фрейма через rows_*()</a></li>
+<li><a class="" href="dplyr-1.1.0-%D0%B0%D1%80%D0%B3%D1%83%D0%BC%D0%B5%D0%BD%D1%82-.by-join_by-reframe.html"><span class="header-section-number">6</span> dplyr 1.1.0: аргумент .by, join_by(), reframe()</a></li>
 <li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решения заданий</a></li>
 <li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5.html">Заключение</a></li>
 </ul>
@@ -75,7 +76,7 @@
 <div id="о-курсе" class="section level2 unnumbered">
 <h2>О курсе<a class="anchor" aria-label="anchor" href="#%D0%BE-%D0%BA%D1%83%D1%80%D1%81%D0%B5"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://selesnow.github.io"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366"></a><code>dplyr</code> - один из наиболее популярных пакетов, который реализует грамматику манипуляции данными в языке R. Официально первый релиз <code>dplyr</code> был выпещен в 2014 году, но пакет развивался, и первая стабильная версия с устоявшимся синтаксисом, под номером 1.0.0 была выпущена весной 2020 года. Этому релизу предшествовала серия статей, в которых Хедли Викхем описывал все нововведения в <code>dplyr</code>. Этот мини курс появился из 5 видео уроков снятых по этим статьям.</p>
+<p><a href="https://selesnow.github.io"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366"></a><code>dplyr</code> - один из наиболее популярных пакетов, который реализует грамматику манипуляции данными в языке R. Официально первый релиз <code>dplyr</code> был выпещен в 2014 году, но пакет развивался, и первая стабильная версия с устоявшимся синтаксисом, под номером 1.0.0 была выпущена весной 2020 года. Этому релизу предшествовала серия статей, в которых Хедли Викхем описывал все нововведения в <code>dplyr</code>. Этот мини курс появился из 6 видео уроков снятых по этим статьям.</p>
 <p>В основе видео уроков лежат следующие статьи:</p>
 <ul>
 <li><a href="https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-select-rename-relocate/">dplyr 1.0.0: select, rename, relocate</a></li>
@@ -83,6 +84,7 @@
 <li><a href="https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-rowwise/">dplyr 1.0.0: working within rows</a></li>
 <li><a href="https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-summarise/">dplyr 1.0.0: new summarise() features</a></li>
 <li><a href="https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/">dplyr 1.0.0: last minute additions</a></li>
+<li><a href="https://www.tidyverse.org/blog/2022/11/dplyr-1-1-0-is-coming-soon/">dplyr 1.1.0 is coming soon</a></li>
 </ul>
 </div>
 <div id="для-кого-этот-курс" class="section level2 unnumbered">
@@ -117,6 +119,7 @@
 <li><a href="%D0%BF%D0%B5%D1%80%D0%B5%D0%B1%D0%BE%D1%80-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B5%D0%B9-rowwise.html">Перебор строк функцией rowwise()</a></li>
 <li><a href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-summarise.html">Обновлённая функция summarise()</a></li>
 <li><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D0%B4%D0%B0%D1%82%D0%B0-%D1%84%D1%80%D0%B5%D0%B9%D0%BC%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-rows_.html">Добавление, изменение и удаление строк дата фрейма через rows_*()</a></li>
+<li><a href="dplyr-1.1.0-%D0%B0%D1%80%D0%B3%D1%83%D0%BC%D0%B5%D0%BD%D1%82-.by-join_by-reframe.html">dplyr 1.1.0: аргумент .by, join_by(), reframe()</a></li>
 </ol>
 </div>
 <div id="благодарности" class="section level2 unnumbered">
@@ -160,7 +163,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2022-08-26.</p>
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2023-01-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

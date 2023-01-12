@@ -1,0 +1,156 @@
+# dplyr 1.1.0: аргумент .by, join_by(), reframe()
+
+## Описание
+Этот уорк посвящён релизу dplyr 1.1.0, в котором были следующие изменения:
+
+1. Добавлен аргумент `.by`, который являеться альтернативным способом группировки данных.
+2. Добавлена вспомогательная функция `join_by()`, которая позволяет реализовывать неравные соединения таблиц.
+3. Ускорена функция `arrange()`
+4. Добавлена новая функция `reframe()``
+
+В основе урока лежит статья ["dplyr 1.1.0 is coming soon"](https://www.tidyverse.org/blog/2022/11/dplyr-1-1-0-is-coming-soon/).
+
+## Видео
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VBhhGavnrtI?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Код
+
+```r
+# update to current dev version
+pak::pak("tidyverse/dplyr")
+
+# lib
+library(dplyr)
+library(clock)
+
+# random seed
+set.seed(12345)
+
+# Временная группировка с помощью .by
+
+## тестовый набор данных
+expenses <- tibble(
+  id = c(1, 2, 1, 3, 1, 2, 3),
+  region = c("A", "A", "A", "B", "B", "A", "A"),
+  cost = c(25, 20, 19, 12, 9, 6, 6)
+)
+expenses
+
+## предыдущий вариант написания агрегации
+expenses |>
+  group_by(region) |> 
+  summarise(cost = mean(cost))
+
+## теперь можно использовать аргумент .by
+expenses |>
+  summarise(cost = mean(cost), .by = region)
+
+## группировка по нескольким столбцам
+expenses |>
+  group_by(id, region) |>
+  summarise(cost = mean(cost))
+
+expenses |>
+  summarise(cost = mean(cost), .by = c(id, region))
+
+## другие глаголы
+expenses |>
+  mutate(mean = mean(cost), .by = region)
+
+expenses |>
+  slice(2, .by = region)
+
+# Улучшенный join
+## гибкое соединение с помощью join_by
+join_by(x_id == y_id, region)
+
+df1 <- tibble(x_id = c(1, 2, 2), region = c("A", "B", "A"), x = c(5, 10, 4))
+df2 <- tibble(y_id = c(2, 1, 2), region = c("A", "A", "C"), y = c(12, 8, 7))
+
+df1 |>
+  left_join(df2, join_by(x_id == y_id, region))
+
+## неравные соединения
+## список вечеринок
+parties <- tibble(
+  q = 1:4,
+  party = date_parse(c("2022-01-10", "2022-04-04", "2022-07-11", "2022-10-03"))
+)
+
+parties
+
+## список сотрудников с днями рождения
+employees <- tibble(
+  name = wakefield::name(100),
+  birthday = date_parse("2022-01-01") + (sample(365, 100, replace = TRUE) - 1)
+)
+
+employees
+
+## теперь по каждому сотруднику возьмём список вечеринок
+## которые проводились до его дня рождения
+employees |>
+  left_join(parties, join_by(birthday >= party))
+
+## скользящее соединение
+## теперь используем скользящее соединение
+## для того, что бы оставить только самую ближайшую
+## после дня рождения вечеринку
+closest <- employees |>
+  left_join(parties, join_by(closest(birthday >= party)))
+
+## один сотрудник остался без вечеринки
+## поскольку дата рождения у него выпадает
+## раньше, чем стартует первая вечеринка в году
+filter(closest, is.na(party))
+
+## укажем начально и конец квартала для каждой вечеринки
+quarter_start <- function(x) {
+  x <- as_year_quarter_day(x)
+  x <- calendar_start(x, "quarter")
+  as_date(x)
+}
+quarter_end <- function(x) {
+  x <- as_year_quarter_day(x)
+  x <- calendar_end(x, "quarter")
+  as.Date(x)
+}
+
+parties <- parties |>
+  mutate(start = quarter_start(party), end = quarter_end(party))
+
+parties
+
+## мы получили 4 непересекающихся временных диапазона
+## мы знаем что каждый день рождения, одновременно может
+## пренадлежать только одному диапазону
+## для проверки этого условия добавим аргумент multiple = 'error'
+## соединять таблицы будем с помощью between
+## день рождения должен быть между началом и концом квартала
+employees |>
+  left_join(
+    parties, 
+    join_by(between(birthday, start, end)),
+    multiple = "error"
+  )
+
+# Новая функция reframe
+table <- c("a", "b", "d", "f")
+
+df <- tibble(
+  g = c(1, 1, 1, 2, 2, 2, 2),
+  x = c("e", "a", "b", "c", "f", "d", "a")
+)
+
+## было
+df |>
+  summarise(x = intersect(x, table), .by = g)
+
+## стало
+df |>
+  reframe(x = intersect(x, table), .by = g)
+
+```
+
+## Упражнения
+Упражнения будут добалвены в ближайшее время.
