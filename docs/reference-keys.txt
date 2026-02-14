@@ -28,3 +28,8 @@ dplyr-1.1.0-аргумент-.by-join_by-reframe
 видео-5
 код-5
 упражнения-2
+dplyr-1.2.0-filter_out-when_any-recode_values-replace_values
+описание-6
+видео-6
+код-6
+упражнения-3

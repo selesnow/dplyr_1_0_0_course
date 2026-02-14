@@ -7,7 +7,7 @@
 <title>Урок 6 dplyr 1.1.0: аргумент .by, join_by(), reframe() | Введение в dplyr 1.0.0</title>
 <meta name="author" content="Алексей Селезнёв">
 <meta name="description" content="6.1 Описание Этот уорк посвящён релизу dplyr 1.1.0, в котором были следующие изменения: Добавлен аргумент .by, который являеться альтернативным способом группировки данных. Добавлена...">
-<meta name="generator" content="bookdown 0.27 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Урок 6 dplyr 1.1.0: аргумент .by, join_by(), reframe() | Введение в dplyr 1.0.0">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://github.com/selesnow/dplyr_1_0_0_course/dplyr-1.1.0-аргумент-.by-join_by-reframe.html">
@@ -19,7 +19,7 @@
 <meta name="twitter:image" content="https://github.com/selesnow/dplyr_1_0_0_course/img/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -60,6 +60,7 @@
 <li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-summarise.html"><span class="header-section-number">4</span> Обновлённая функция summarise()</a></li>
 <li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D0%B4%D0%B0%D1%82%D0%B0-%D1%84%D1%80%D0%B5%D0%B9%D0%BC%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-rows_.html"><span class="header-section-number">5</span> Добавление, изменение и удаление строк дата фрейма через rows_*()</a></li>
 <li><a class="active" href="dplyr-1.1.0-%D0%B0%D1%80%D0%B3%D1%83%D0%BC%D0%B5%D0%BD%D1%82-.by-join_by-reframe.html"><span class="header-section-number">6</span> dplyr 1.1.0: аргумент .by, join_by(), reframe()</a></li>
+<li><a class="" href="dplyr-1.2.0-filter_out-when_any-recode_values-replace_values.html"><span class="header-section-number">7</span> dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values()</a></li>
 <li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решения заданий</a></li>
 <li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5.html">Заключение</a></li>
 </ul>
@@ -100,7 +101,7 @@
 </h2>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># update to current dev version</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html">pak</a></span><span class="op">(</span><span class="st">"tidyverse/dplyr"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html">pak</a></span><span class="op">(</span><span class="st">"tidyverse/dplyr"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># lib</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
@@ -157,15 +158,15 @@
 <span><span class="co">## список вечеринок</span></span>
 <span><span class="va">parties</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  q <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
-<span>  party <span class="op">=</span> <span class="fu"><a href="https://clock.r-lib.org/reference/date_parse.html">date_parse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2022-01-10"</span>, <span class="st">"2022-04-04"</span>, <span class="st">"2022-07-11"</span>, <span class="st">"2022-10-03"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  party <span class="op">=</span> <span class="fu">date_parse</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2022-01-10"</span>, <span class="st">"2022-04-04"</span>, <span class="st">"2022-07-11"</span>, <span class="st">"2022-10-03"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">parties</span></span>
 <span></span>
 <span><span class="co">## список сотрудников с днями рождения</span></span>
 <span><span class="va">employees</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
-<span>  name <span class="op">=</span> <span class="fu">wakefield</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/wakefield/man/name.html">name</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
-<span>  birthday <span class="op">=</span> <span class="fu"><a href="https://clock.r-lib.org/reference/date_parse.html">date_parse</a></span><span class="op">(</span><span class="st">"2022-01-01"</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">365</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  name <span class="op">=</span> <span class="fu">wakefield</span><span class="fu">::</span><span class="fu">name</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
+<span>  birthday <span class="op">=</span> <span class="fu">date_parse</span><span class="op">(</span><span class="st">"2022-01-01"</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">365</span>, <span class="fl">100</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">employees</span></span>
@@ -189,13 +190,13 @@
 <span></span>
 <span><span class="co">## укажем начально и конец квартала для каждой вечеринки</span></span>
 <span><span class="va">quarter_start</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://clock.r-lib.org/reference/as_year_quarter_day.html">as_year_quarter_day</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://clock.r-lib.org/reference/calendar-boundary.html">calendar_start</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"quarter"</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://clock.r-lib.org/reference/as_date.html">as_date</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">as_year_quarter_day</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">calendar_start</span><span class="op">(</span><span class="va">x</span>, <span class="st">"quarter"</span><span class="op">)</span></span>
+<span>  <span class="fu">as_date</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">quarter_end</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://clock.r-lib.org/reference/as_year_quarter_day.html">as_year_quarter_day</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://clock.r-lib.org/reference/calendar-boundary.html">calendar_end</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"quarter"</span><span class="op">)</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">as_year_quarter_day</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">calendar_end</span><span class="op">(</span><span class="va">x</span>, <span class="st">"quarter"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -237,13 +238,21 @@
 <h2>
 <span class="header-section-number">6.4</span> Упражнения<a class="anchor" aria-label="anchor" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-2"><i class="fas fa-link"></i></a>
 </h2>
-<p>Упражнения будут добалвены в ближайшее время.</p>
-
+<ol style="list-style-type: decimal">
+<li>
+<strong>Аргумент <code>.by</code>:</strong> В чем заключается главное отличие использования временной группировки через аргумент <code>.by</code> от классического метода <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>?</li>
+<li>
+<strong>Сложные джойны:</strong> Какую новую вспомогательную функцию необходимо использовать внутри <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code> или <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>, чтобы выполнить соединение таблиц по неравенству (например, когда дата в одной таблице должна быть больше даты в другой)?</li>
+<li>
+<strong>Функция <code><a href="https://dplyr.tidyverse.org/reference/reframe.html">reframe()</a></code>:</strong> Для какой специфической задачи была введена функция <code><a href="https://dplyr.tidyverse.org/reference/reframe.html">reframe()</a></code>, и почему для этого теперь не рекомендуется использовать <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code>?</li>
+<li>
+<strong>Производительность <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code>:</strong> Какое техническое изменение произошло в работе функции <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> в версии 1.1.0 и как это отразилось на скорости обработки данных?</li>
+</ol>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D0%B4%D0%B0%D1%82%D0%B0-%D1%84%D1%80%D0%B5%D0%B9%D0%BC%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-rows_.html"><span class="header-section-number">5</span> Добавление, изменение и удаление строк дата фрейма через rows_*()</a></div>
-<div class="next"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решения заданий</a></div>
+<div class="next"><a href="dplyr-1.2.0-filter_out-when_any-recode_values-replace_values.html"><span class="header-section-number">7</span> dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values()</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -269,7 +278,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2023-01-12.</p>
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2026-02-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

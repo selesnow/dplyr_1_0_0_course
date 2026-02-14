@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Урок 7 dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values() | Введение в dplyr 1.0.0</title>
+<meta name="author" content="Алексей Селезнёв">
+<meta name="description" content="7.1 Описание Этот урок посвящён релизу dplyr 1.2.0, в котором основной фокус сделан на удобную и выразительную работу с заменой и исключением значений. В релизе появились следующие нововведения:...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Урок 7 dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values() | Введение в dplyr 1.0.0">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://github.com/selesnow/dplyr_1_0_0_course/dplyr-1.2.0-filter_out-when_any-recode_values-replace_values.html">
+<meta property="og:image" content="https://github.com/selesnow/dplyr_1_0_0_course/img/cover.png">
+<meta property="og:description" content="7.1 Описание Этот урок посвящён релизу dplyr 1.2.0, в котором основной фокус сделан на удобную и выразительную работу с заменой и исключением значений. В релизе появились следующие нововведения:...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Урок 7 dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values() | Введение в dplyr 1.0.0">
+<meta name="twitter:description" content="7.1 Описание Этот урок посвящён релизу dplyr 1.2.0, в котором основной фокус сделан на удобную и выразительную работу с заменой и исключением значений. В релизе появились следующие нововведения:...">
+<meta name="twitter:image" content="https://github.com/selesnow/dplyr_1_0_0_course/img/cover.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-114798296-1"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-114798296-1');
+    </script><link rel="shortcut icon" href="img/favicon.ico">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Введение в dplyr 1.0.0</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Введение</a></li>
+<li><a class="" href="%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8-select-rename_with-%D0%B8-relocate.html"><span class="header-section-number">1</span> Функции select(), rename_with() и relocate()</a></li>
+<li><a class="" href="%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-across.html"><span class="header-section-number">2</span> Функция across()</a></li>
+<li><a class="" href="%D0%BF%D0%B5%D1%80%D0%B5%D0%B1%D0%BE%D1%80-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B5%D0%B9-rowwise.html"><span class="header-section-number">3</span> Перебор строк функцией rowwise()</a></li>
+<li><a class="" href="%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D1%91%D0%BD%D0%BD%D0%B0%D1%8F-%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F-summarise.html"><span class="header-section-number">4</span> Обновлённая функция summarise()</a></li>
+<li><a class="" href="%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D1%82%D1%80%D0%BE%D0%BA-%D0%B4%D0%B0%D1%82%D0%B0-%D1%84%D1%80%D0%B5%D0%B9%D0%BC%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-rows_.html"><span class="header-section-number">5</span> Добавление, изменение и удаление строк дата фрейма через rows_*()</a></li>
+<li><a class="" href="dplyr-1.1.0-%D0%B0%D1%80%D0%B3%D1%83%D0%BC%D0%B5%D0%BD%D1%82-.by-join_by-reframe.html"><span class="header-section-number">6</span> dplyr 1.1.0: аргумент .by, join_by(), reframe()</a></li>
+<li><a class="active" href="dplyr-1.2.0-filter_out-when_any-recode_values-replace_values.html"><span class="header-section-number">7</span> dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values()</a></li>
+<li><a class="" href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решения заданий</a></li>
+<li><a class="" href="%D0%B7%D0%B0%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5.html">Заключение</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/selesnow/dplyr_1_0_0_course">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="dplyr-1.2.0-filter_out-when_any-recode_values-replace_values" class="section level1" number="7">
+<h1>
+<span class="header-section-number">Урок 7</span> dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values()<a class="anchor" aria-label="anchor" href="#dplyr-1.2.0-filter_out-when_any-recode_values-replace_values"><i class="fas fa-link"></i></a>
+</h1>
+<div id="описание-6" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Описание<a class="anchor" aria-label="anchor" href="#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>Этот урок посвящён релизу dplyr 1.2.0, в котором основной фокус сделан на удобную и выразительную работу с заменой и исключением значений.</p>
+<p>В релизе появились следующие нововведения:</p>
+<ol style="list-style-type: decimal">
+<li>Добавлена функция <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter_out()</a></code>, которая является семантически более читаемой альтернативой <code>filter(!...)</code> и упрощает исключение строк из данных.</li>
+<li>Добавлена функция <code><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">recode_values()</a></code>, позволяющая декларативно и безопасно перекодировать значения в векторах.</li>
+<li>Добавлена функция <code><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">replace_values()</a></code>, предназначенная для массовой замены значений без изменения длины объекта.</li>
+<li>Добавлена функция <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">replace_when()</a></code>, которая расширяет идею <code><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when()</a></code> и делает условную замену значений более выразительной и читаемой.</li>
+</ol>
+<p>В основе урока лежит статья <a href="https://tidyverse.org/blog/2026/02/dplyr-1-2-0/">“dplyr 1.2.0”</a>.</p>
+</div>
+<div id="видео-6" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Видео<a class="anchor" aria-label="anchor" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-6"><i class="fas fa-link"></i></a>
+</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2GXYCZKKYDA?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+</div>
+<div id="код-6" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Код<a class="anchor" aria-label="anchor" href="#%D0%BA%D0%BE%D0%B4-6"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># filter_out --------------------------------------------------------------</span></span>
+<span><span class="va">patients</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Anne"</span>, <span class="st">"Mark"</span>, <span class="st">"Sarah"</span>, <span class="st">"Davis"</span>, <span class="st">"Max"</span>, <span class="st">"Derek"</span>, <span class="st">"Tina"</span><span class="op">)</span>,</span>
+<span>  deceased <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">NA</span>, <span class="cn">TRUE</span>, <span class="cn">NA</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2005</span>, <span class="fl">2010</span>, <span class="cn">NA</span>, <span class="fl">2020</span>, <span class="fl">2010</span>, <span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">patients</span></span>
+<span></span>
+<span><span class="co"># Отфильтруйте строки, в которых пациент умер , и год смерти был до 2012 года.</span></span>
+<span><span class="va">patients</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">deceased</span> <span class="op">&amp;</span> <span class="va">date</span> <span class="op">&lt;</span> <span class="fl">2012</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># проверка</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span></span>
+<span>  <span class="va">patients</span>,</span>
+<span>  <span class="va">patients</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">deceased</span> <span class="op">&amp;</span> <span class="va">date</span> <span class="op">&lt;</span> <span class="fl">2012</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html">join_by</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">deceased</span>, <span class="va">date</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># правильный вариант через filter</span></span>
+<span><span class="va">patients</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span></span>
+<span>    <span class="op">!</span><span class="op">(</span><span class="op">(</span><span class="va">deceased</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">deceased</span><span class="op">)</span><span class="op">)</span> <span class="op">&amp;</span></span>
+<span>        <span class="op">(</span><span class="va">date</span> <span class="op">&lt;</span> <span class="fl">2012</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># вариант с filter out</span></span>
+<span><span class="va">patients</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter_out</a></span><span class="op">(</span><span class="va">deceased</span>, <span class="va">date</span> <span class="op">&lt;</span> <span class="fl">2012</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># filter - позволяет указать какие строки надо сохранить</span></span>
+<span><span class="co"># filter_out - позволяет указать какие строки надо убрать из таблицы</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># when_any() --------------------------------------------------------------</span></span>
+<span></span>
+<span><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="st">"CA"</span>, <span class="st">"PR"</span>, <span class="st">"RU"</span>, <span class="st">"US"</span>, <span class="cn">NA</span>, <span class="st">"CA"</span>, <span class="st">"PR"</span><span class="op">)</span>,</span>
+<span>  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">100</span>, <span class="fl">150</span>, <span class="cn">NA</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">300</span>, <span class="fl">250</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">countries</span></span>
+<span></span>
+<span><span class="co"># Отфильтруйте строки, где значения «US» и «CA» находятся в диапазоне от 200 до 300, </span></span>
+<span><span class="co"># или строки, где значения «PR» и «RU» находятся в диапазоне от 100 до 200.</span></span>
+<span> </span>
+<span><span class="co"># решение через фильтр filter()</span></span>
+<span><span class="va">countries</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span></span>
+<span>    <span class="op">(</span><span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="st">"CA"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op">(</span><span class="va">score</span>, <span class="fl">200</span>, <span class="fl">300</span><span class="op">)</span><span class="op">)</span> <span class="op">|</span></span>
+<span>      <span class="op">(</span><span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PR"</span>, <span class="st">"RU"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op">(</span><span class="va">score</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">countries</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/when-any-all.html">when_any</a></span><span class="op">(</span></span>
+<span>    <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"US"</span>, <span class="st">"CA"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op">(</span><span class="va">score</span>, <span class="fl">200</span>, <span class="fl">300</span><span class="op">)</span>,</span>
+<span>    <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PR"</span>, <span class="st">"RU"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op">(</span><span class="va">score</span>, <span class="fl">100</span>, <span class="fl">200</span><span class="op">)</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># recode_values()  --------------------------------------------------------</span></span>
+<span></span>
+<span><span class="va">likert</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Задача реализовать оценки по шкале Ликерта</span></span>
+<span><span class="co"># решение через case_when()</span></span>
+<span><span class="va">likert</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    category <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">score</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">~</span> <span class="st">"Strongly disagree"</span>,</span>
+<span>      <span class="va">score</span> <span class="op">==</span> <span class="fl">2</span> <span class="op">~</span> <span class="st">"Disagree"</span>,</span>
+<span>      <span class="va">score</span> <span class="op">==</span> <span class="fl">3</span> <span class="op">~</span> <span class="st">"Neutral"</span>,</span>
+<span>      <span class="va">score</span> <span class="op">==</span> <span class="fl">4</span> <span class="op">~</span> <span class="st">"Agree"</span>,</span>
+<span>      <span class="va">score</span> <span class="op">==</span> <span class="fl">5</span> <span class="op">~</span> <span class="st">"Strongly agree"</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># решение через recode_values()</span></span>
+<span><span class="va">likert</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    category <span class="op">=</span> <span class="va">score</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">recode_values</a></span><span class="op">(</span></span>
+<span>        <span class="fl">1</span> <span class="op">~</span> <span class="st">"Strongly disagree"</span>,</span>
+<span>        <span class="fl">2</span> <span class="op">~</span> <span class="st">"Disagree"</span>,</span>
+<span>        <span class="fl">3</span> <span class="op">~</span> <span class="st">"Neutral"</span>,</span>
+<span>        <span class="fl">4</span> <span class="op">~</span> <span class="st">"Agree"</span>,</span>
+<span>        <span class="fl">5</span> <span class="op">~</span> <span class="st">"Strongly agree"</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># решение через создание таблицы соответствий</span></span>
+<span><span class="va">lookup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">from</span> , <span class="op">~</span><span class="va">to</span>             ,</span>
+<span>  <span class="fl">1</span> , <span class="st">"Strongly disagree"</span> ,</span>
+<span>  <span class="fl">2</span> , <span class="st">"Disagree"</span>          ,</span>
+<span>  <span class="fl">3</span> , <span class="st">"Neutral"</span>           ,</span>
+<span>  <span class="fl">4</span> , <span class="st">"Agree"</span>             ,</span>
+<span>  <span class="fl">5</span> , <span class="st">"Strongly agree"</span>    ,</span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">likert</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>category <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">recode_values</a></span><span class="op">(</span><span class="va">score</span>, from <span class="op">=</span> <span class="va">lookup</span><span class="op">$</span><span class="va">from</span>, to <span class="op">=</span> <span class="va">lookup</span><span class="op">$</span><span class="va">to</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># обработка не описанных для перекодирования значений</span></span>
+<span><span class="co"># аргумент unmatched</span></span>
+<span><span class="va">likert</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">likert</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    score <span class="op">=</span> <span class="va">score</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">recode_values</a></span><span class="op">(</span></span>
+<span>        from <span class="op">=</span> <span class="va">lookup</span><span class="op">$</span><span class="va">from</span>,</span>
+<span>        to <span class="op">=</span> <span class="va">lookup</span><span class="op">$</span><span class="va">to</span>,</span>
+<span>        unmatched <span class="op">=</span> <span class="st">"default"</span>, default <span class="op">=</span> <span class="st">'UNK'</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># replace_values()  -------------------------------------------------------</span></span>
+<span></span>
+<span><span class="co"># Задача объединить некоторые, но не все, названия этих школ в общие категории</span></span>
+<span><span class="va">schools</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"UNC"</span>,</span>
+<span>    <span class="st">"Chapel Hill"</span>,</span>
+<span>    <span class="cn">NA</span>,</span>
+<span>    <span class="st">"Duke"</span>,</span>
+<span>    <span class="st">"Duke University"</span>,</span>
+<span>    <span class="st">"UNC"</span>,</span>
+<span>    <span class="st">"NC State"</span>,</span>
+<span>    <span class="st">"ECU"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># решение через case_when() или recode_values():</span></span>
+<span><span class="va">schools</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UNC"</span>, <span class="st">"Chapel Hill"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"UNC Chapel Hill"</span>,</span>
+<span>      <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Duke"</span>, <span class="st">"Duke University"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Duke"</span>,</span>
+<span>      .default <span class="op">=</span> <span class="va">name</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">schools</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">recode_values</a></span><span class="op">(</span></span>
+<span>      <span class="va">name</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UNC"</span>, <span class="st">"Chapel Hill"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"UNC Chapel Hill"</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Duke"</span>, <span class="st">"Duke University"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Duke"</span>,</span>
+<span>      default <span class="op">=</span> <span class="va">name</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># решение через replace_values</span></span>
+<span><span class="va">schools</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="va">name</span> <span class="op">|&gt;</span></span>
+<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">replace_values</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UNC"</span>, <span class="st">"Chapel Hill"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"UNC Chapel Hill"</span>,</span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Duke"</span>, <span class="st">"Duke University"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Duke"</span></span>
+<span>      <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># решение через replace_values + таблица сопостовления</span></span>
+<span><span class="va">lookup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<span>  <span class="op">~</span><span class="va">from</span>             , <span class="op">~</span><span class="va">to</span>               ,</span>
+<span>  <span class="st">"UNC"</span>             , <span class="st">"UNC Chapel Hill"</span> ,</span>
+<span>  <span class="st">"Chapel Hill"</span>     , <span class="st">"UNC Chapel Hill"</span> ,</span>
+<span>  <span class="st">"Duke"</span>            , <span class="st">"Duke"</span>            ,</span>
+<span>  <span class="st">"Duke University"</span> , <span class="st">"Duke"</span>            ,</span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">schools</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">replace_values</a></span><span class="op">(</span><span class="va">name</span>, from <span class="op">=</span> <span class="va">lookup</span><span class="op">$</span><span class="va">from</span>, to <span class="op">=</span> <span class="va">lookup</span><span class="op">$</span><span class="va">to</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># ещё примеры использования  replace_values()</span></span>
+<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NC"</span>, <span class="st">"NY"</span>, <span class="st">"CA"</span>, <span class="cn">NA</span>, <span class="st">"NY"</span>, <span class="st">"Unknown"</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## замена пропущенных значений константой, аналог tidyr::replace_na</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">replace_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="cn">NA</span> <span class="op">~</span> <span class="st">"Unknown"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## замена пропущенных значений данными из другого столбца</span></span>
+<span><span class="va">region</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"South"</span>, <span class="st">"North"</span>, <span class="st">"West"</span>, <span class="st">"East"</span>, <span class="st">"North"</span>, <span class="st">"Unknown"</span>, <span class="st">"West"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">replace_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="cn">NA</span> <span class="op">~</span> <span class="va">region</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Замена проблемных значений на NA</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">replace_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="st">"Unknown"</span> <span class="op">~</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Замена разных проблемных значений в одно действие</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">replace_values</a></span><span class="op">(</span><span class="va">state</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"Unknown"</span>, <span class="st">"-"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"&lt;missing&gt;"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># пример устаревщих реализаций</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span>, <span class="st">"Unknown"</span>, <span class="va">state</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Unknown"</span>, .default <span class="op">=</span> <span class="va">state</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="упражнения-3" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Упражнения<a class="anchor" aria-label="anchor" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-3"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li><p><strong>Проблема двусмысленности:</strong> В чем заключается главная претензия авторов к функции <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> при попытке «отфильтровать вон» (drop) определенные строки?</p></li>
+<li><p><strong>Обработка пропусков:</strong> Каким образом <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter_out()</a></code> обрабатывает значения <code>NA</code> и почему это безопаснее, чем использовать <code>filter(!условие)</code>?</p></li>
+<li><p><strong>Логика OR:</strong> Какую синтаксическую проблему решает функция <code><a href="https://dplyr.tidyverse.org/reference/when-any-all.html">when_any()</a></code> внутри <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>?</p></li>
+<li><p><strong>Типизация:</strong> В чем концептуальное различие между функциями <code><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">recode_values()</a></code> (Recoding) и <code><a href="https://dplyr.tidyverse.org/reference/recode-and-replace-values.html">replace_values()</a></code> (Replacing) с точки зрения типа выходных данных?</p></li>
+<li><p><strong>Защитное программирование:</strong> Зачем в функциях перекодировки использовать аргумент <code>unmatched = "error"</code>?</p></li>
+</ol>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="dplyr-1.1.0-%D0%B0%D1%80%D0%B3%D1%83%D0%BC%D0%B5%D0%BD%D1%82-.by-join_by-reframe.html"><span class="header-section-number">6</span> dplyr 1.1.0: аргумент .by, join_by(), reframe()</a></div>
+<div class="next"><a href="%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B9.html">Решения заданий</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dplyr-1.2.0-filter_out-when_any-recode_values-replace_values"><span class="header-section-number">7</span> dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values()</a></li>
+<li><a class="nav-link" href="#%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5-6"><span class="header-section-number">7.1</span> Описание</a></li>
+<li><a class="nav-link" href="#%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE-6"><span class="header-section-number">7.2</span> Видео</a></li>
+<li><a class="nav-link" href="#%D0%BA%D0%BE%D0%B4-6"><span class="header-section-number">7.3</span> Код</a></li>
+<li><a class="nav-link" href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-3"><span class="header-section-number">7.4</span> Упражнения</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/selesnow/dplyr_1_0_0_course/blob/master/7-dplyr-1-2-0.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/selesnow/dplyr_1_0_0_course/edit/master/7-dplyr-1-2-0.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Введение в dplyr 1.0.0</strong>" was written by Алексей Селезнёв. It was last built on 2026-02-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

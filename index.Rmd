@@ -27,6 +27,7 @@ csl: chicago-fullnote-bibliography.csl
 * [dplyr 1.0.0: new summarise() features](https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-summarise/)
 * [dplyr 1.0.0: last minute additions](https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/)
 * [dplyr 1.1.0 is coming soon](https://www.tidyverse.org/blog/2022/11/dplyr-1-1-0-is-coming-soon/)
+* ["dplyr 1.2.0"](https://tidyverse.org/blog/2026/02/dplyr-1-2-0/)
 
 ## Для кого этот курс {-}
 Для прохождения курса вы уже должны иметь навыки работы с инфраструктурой `tidyverse`. Приступать к прохождению курса "Введение в dplyr 1.0.0" я советую тем, кто уже имеет базовые навыки работы в R. Т.е. изначально я рекомендую вам пройти курс ["Язык R для пользователей Excel"](https://selesnow.github.io/r4excel_users/), и потом приступать к прохождению данного курса.
@@ -60,11 +61,4 @@ csl: chicago-fullnote-bibliography.csl
 4. [Обновлённая функция summarise()](обновлённая-функция-summarise.html)
 5. [Добавление, изменение и удаление строк дата фрейма через rows_*()](добавление-изменение-и-удаление-строк-дата-фрейма-через-rows_.html)
 6. [dplyr 1.1.0: аргумент .by, join_by(), reframe()](dplyr-1.1.0-аргумент-.by-join_by-reframe.html)
-
-## Благодарности {-}
-Курс, и все сопутствующие материалы предоставляются бесплатно, но если у вас есть желание отблагодарить автора за этот видео курс вы можете перечислить любую произвольную сумму на [этой странице](https://secure.wayforpay.com/payment/r4excel_users).
-
-Либо с помощью кнопки:
-<center>
-<script type="text/javascript" id="widget-wfp-script" src="https://secure.wayforpay.com/server/pay-widget.js?ref=button"></script> <script type="text/javascript">function runWfpWdgt(url){var wayforpay=new Wayforpay();wayforpay.invoice(url);}</script> <button type="button" onclick="runWfpWdgt('https://secure.wayforpay.com/button/b9c8a14345975');" style="display:inline-block!important;background:#2B3160 url('https://s3.eu-central-1.amazonaws.com/w4p-merch/button/bg2x2.png') no-repeat center right;background-size:cover;width: 256px!important;height:54px!important;border:none!important;border-radius:14px!important;padding:18px!important;box-shadow:3px 2px 8px rgba(71,66,66,0.22)!important;text-align:left!important;box-sizing:border-box!important;" onmouseover="this.style.opacity='0.8';" onmouseout="this.style.opacity='1';"><span style="font-family:Verdana,Arial,sans-serif!important;font-weight:bold!important;font-size:14px!important;color:#ffffff!important;line-height:18px!important;vertical-align:middle!important;">Оплатить</span></button>
-</center>
+7. [dplyr 1.2.0: filter_out(), when_any(), recode_values(), replace_values()]

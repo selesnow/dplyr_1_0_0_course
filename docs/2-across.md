@@ -10,7 +10,7 @@
 
 ## Код
 
-```r
+``` r
 # devtools::install_github("tidyverse/dplyr")
 library(dplyr, warn.conflicts = FALSE)
 

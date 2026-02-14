@@ -10,7 +10,7 @@
 
 ## Код
 
-```r
+``` r
 #devtools::install_github("tidyverse/dplyr")
 library(dplyr)
 
@@ -114,8 +114,9 @@ df %>%
 
 Для генерации таблицы параметров выполните следующий код:
 
-```r
+``` r
 library(dplyr)
+#> Warning: package 'dplyr' was built under R version 4.4.3
 
 params <- tribble(
  ~sim, ~n, ~mean, ~sd,
