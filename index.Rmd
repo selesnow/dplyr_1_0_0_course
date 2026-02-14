@@ -27,7 +27,7 @@ csl: chicago-fullnote-bibliography.csl
 * [dplyr 1.0.0: new summarise() features](https://www.tidyverse.org/blog/2020/03/dplyr-1-0-0-summarise/)
 * [dplyr 1.0.0: last minute additions](https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/)
 * [dplyr 1.1.0 is coming soon](https://www.tidyverse.org/blog/2022/11/dplyr-1-1-0-is-coming-soon/)
-* ["dplyr 1.2.0"](https://tidyverse.org/blog/2026/02/dplyr-1-2-0/)
+* [dplyr 1.2.0](https://tidyverse.org/blog/2026/02/dplyr-1-2-0/)
 
 ## Для кого этот курс {-}
 Для прохождения курса вы уже должны иметь навыки работы с инфраструктурой `tidyverse`. Приступать к прохождению курса "Введение в dplyr 1.0.0" я советую тем, кто уже имеет базовые навыки работы в R. Т.е. изначально я рекомендую вам пройти курс ["Язык R для пользователей Excel"](https://selesnow.github.io/r4excel_users/), и потом приступать к прохождению данного курса.
