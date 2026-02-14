@@ -43,7 +43,16 @@ csl: chicago-fullnote-bibliography.csl
 
 Мною были разработаны такие R пакеты как: `ryandexdirect`, `rfacebookstat`, `timeperiodsR`, `rvkstat` и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 130 000 раз.
 
-Также я являюсь автором курса ["Язык R для интернет-маркетинга"](https://needfordata.ru/r).
+Также я являюсь автором ряда других курсов по языку R:
+
+* [Язык R для пользователей Excel](https://selesnow.github.io/r4excel_users/).
+* [Циклы и функционалы в языке R](https://selesnow.github.io/iterations_in_r/).
+* [Разработка пакетов на языке R](https://selesnow.github.io/r_package_course/).
+* [Язык R для разработки AI инструментов](https://selesnow.github.io/build_ai_tools_using_r/).
+* [Разработка telegram ботов на языке R](https://selesnow.github.io/build_telegram_bot_using_r/)
+* [Язык R для интернет-маркетинга](https://www.youtube.com/playlist?list=PLD2LDq8edf4o6dSZ4BIr7J08gT97nimH_).
+
+Все мои курсы являются бесплатными, и находятся в открытом доступе со всеми сопуствующими материалами.
 
 Веду свой авторский [Telegram](https://t.me/R4marketing) и [YouTube](https://www.youtube.com/R4marketing/?sub_confirmation=1) канал R4marketing. Буду рад видеть вас в рядах подписчиков.
 
