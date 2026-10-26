@@ -4,7 +4,7 @@ author: "Алексей Селезнёв"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-url: https://github.com/selesnow/dplyr_1_0_0_course
+url: https://alexey-seleznev.pro/dplyr_1_0_0_course
 cover-image: img/cover.png
 description: |
   Серия видео уроков посвящённая обновлению dplyr 1.0.0..
@@ -17,7 +17,7 @@ csl: chicago-fullnote-bibliography.csl
 ------
 
 ## О курсе {-}
-<a href="https://selesnow.github.io"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366" /></a>`dplyr` - один из наиболее популярных пакетов, который реализует грамматику манипуляции данными в языке R. Официально первый релиз `dplyr` был выпещен в 2014 году, но пакет развивался, и первая стабильная версия с устоявшимся синтаксисом, под номером 1.0.0 была выпущена весной 2020 года. Этому релизу предшествовала серия статей, в которых Хедли Викхем описывал все нововведения в `dplyr`. Этот мини курс появился из 6 видео уроков снятых по этим статьям.
+<a href="https://alexey-seleznev.pro"><img src="img/cover.png" align="right" alt="Cover image" class="cover" width="230" height="366" /></a>`dplyr` - один из наиболее популярных пакетов, который реализует грамматику манипуляции данными в языке R. Официально первый релиз `dplyr` был выпещен в 2014 году, но пакет развивался, и первая стабильная версия с устоявшимся синтаксисом, под номером 1.0.0 была выпущена весной 2020 года. Этому релизу предшествовала серия статей, в которых Хедли Викхем описывал все нововведения в `dplyr`. Этот мини курс появился из 6 видео уроков снятых по этим статьям.
 
 В основе видео уроков лежат следующие статьи:
 
@@ -30,7 +30,7 @@ csl: chicago-fullnote-bibliography.csl
 * [dplyr 1.2.0](https://tidyverse.org/blog/2026/02/dplyr-1-2-0/)
 
 ## Для кого этот курс {-}
-Для прохождения курса вы уже должны иметь навыки работы с инфраструктурой `tidyverse`. Приступать к прохождению курса "Введение в dplyr 1.0.0" я советую тем, кто уже имеет базовые навыки работы в R. Т.е. изначально я рекомендую вам пройти курс ["Язык R для пользователей Excel"](https://selesnow.github.io/r4excel_users/), и потом приступать к прохождению данного курса.
+Для прохождения курса вы уже должны иметь навыки работы с инфраструктурой `tidyverse`. Приступать к прохождению курса "Введение в dplyr 1.0.0" я советую тем, кто уже имеет базовые навыки работы в R. Т.е. изначально я рекомендую вам пройти курс ["Язык R для пользователей Excel"](https://alexey-seleznev.pro/r4excel_users/), и потом приступать к прохождению данного курса.
 
 ## Рекомендации по прохождению курса {-}
 Данный курс состоит из 5 видео уроков общей длительность 1 час 2 минуты. К каждому уроку есть рассмотренный в видео код, это сделано для вашего удобства, скопируйте его и выполняйте по мере просмотра видео лекции. 
@@ -39,17 +39,17 @@ csl: chicago-fullnote-bibliography.csl
 
 ## Об авторе {-}
 Меня зовут Алексей Селезнёв, с 2008 года я являюсь практикующим аналитиком. На данный момент основной моей деятельностью является развитие отдела аналитики в агентстве интернет-маркетинга Netpeak.
-<a href="https://selesnow.github.io"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
+<a href="https://alexey-seleznev.pro"><img src="img/author.png" width="200" height="200" align="left" alt="Алексей Селезнёв" hspace="20" vspace="7" /></a>
 
 Мною были разработаны такие R пакеты как: `ryandexdirect`, `rfacebookstat`, `timeperiodsR`, `rvkstat` и некоторые другие. На данный момент написанные мной пакеты только с CRAN были установленны более 130 000 раз.
 
 Также я являюсь автором ряда других курсов по языку R:
 
-* [Язык R для пользователей Excel](https://selesnow.github.io/r4excel_users/).
-* [Циклы и функционалы в языке R](https://selesnow.github.io/iterations_in_r/).
-* [Разработка пакетов на языке R](https://selesnow.github.io/r_package_course/).
-* [Язык R для разработки AI инструментов](https://selesnow.github.io/build_ai_tools_using_r/).
-* [Разработка telegram ботов на языке R](https://selesnow.github.io/build_telegram_bot_using_r/)
+* [Язык R для пользователей Excel](https://alexey-seleznev.pro/r4excel_users/).
+* [Циклы и функционалы в языке R](https://alexey-seleznev.pro/iterations_in_r/).
+* [Разработка пакетов на языке R](https://alexey-seleznev.pro/r_package_course/).
+* [Язык R для разработки AI инструментов](https://alexey-seleznev.pro/build_ai_tools_using_r/).
+* [Разработка telegram ботов на языке R](https://alexey-seleznev.pro/build_telegram_bot_using_r/)
 * [Язык R для интернет-маркетинга](https://www.youtube.com/playlist?list=PLD2LDq8edf4o6dSZ4BIr7J08gT97nimH_).
 
 Все мои курсы являются бесплатными, и находятся в открытом доступе со всеми сопуствующими материалами.
